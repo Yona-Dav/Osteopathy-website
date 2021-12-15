@@ -101,3 +101,34 @@ class MedicalProfileCreateView(LoginRequiredMixin, CreateView):
 class MedicalProfileDetailView(LoginRequiredMixin,DetailView):
     model = MedicalProfile
     template_name = 'medical.html'
+
+
+class MedicalProfileUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'medical_profile.html'
+    model = MedicalProfile
+    form_class = MedicalProfileForm
+    success_url = reverse_lazy('my_profile')
+
+    def form_valid(self, form):
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class ProfileViewList(ListView, UserPassesTestMixin):
+    model = Profile
+    template_name = 'profile_list.html'
+    context_object_name = 'profiles'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class ProfileDetailView(DetailView, UserPassesTestMixin):
+    model = Profile
+    template_name = 'profile_detail.html'
+    context_object_name = 'profile'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+

@@ -40,7 +40,7 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#193051">
+                    <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#193051; background-color:#0fb4a9">
                         Book an appointment
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -54,6 +54,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contact' %}"style="color:#193051" >Contact</a>
                 </li>
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profiles' %}"style="color:#193051" >Profiles</a>
+                </li>
+                {%endif%}
                 {%if not user.is_authenticated %}
                 <li class="nav-item">
 

@@ -5,3 +5,11 @@
         padding-top:80px;
         padding-bottom:80px;
         filter: opacity(50%);}
+
+
+.profile-hover:hover {background-color:#0fb4a9 !important;}
+
+.save-change{background-color:#193051;
+color:white}
+
+.save-change:hover {transform:scale(1.1)}

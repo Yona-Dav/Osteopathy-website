@@ -1,0 +1,29 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block title %}
+My profile
+{% endblock %}
+{% block css %}
+<link href="{% static 'visitors/css/styles2.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <h3 class="card-header">Information about {{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}}</h3>
+            <div class="card-body">
+                <h4 class="card-title">Profile</h4>
+                <p class="card-text">Username: {{profile.user.username}}</p>
+                <p class="card-text">Email: {{profile.user.email}}</p>
+                <p class="card-text">Phone Number: {{profile.phone}}</p>
+                <h4 class="card-title">Personal Information</h4>
+                <p class="card-text">Birth_date: {{profile.birth_date}}</p>
+                <p class="card-text">Gender: {{profile.gender}}</p>
+                <p class="card-text">Marital Status: {{profile.marital_status}}</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

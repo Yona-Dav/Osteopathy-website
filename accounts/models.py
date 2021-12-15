@@ -9,7 +9,7 @@ class Profile(models.Model):
     MARITAL = (('Single','Single'),('Married','Married'),('Divorced','Divorced'), ('Widowed','Widowed'),('Separated', 'Separated'))
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(default='2021-11-11')
-    sex = models.CharField(max_length=100, choices=SEX,  blank=True)
+    gender = models.CharField(max_length=100, choices=SEX,  blank=True)
     marital_status= models.CharField(max_length=100, choices=MARITAL, blank=True)
     phone = models.CharField(max_length=100, blank=True)
     address = models.CharField(max_length=200, blank=True)

@@ -1,27 +1,34 @@
 {% extends 'partials/base.html' %}
 {% load bootstrap5 %}
+{% load static %}
 {% block title %}
 My profile
 {% endblock %}
 {% block css %}
-<style>
-.profile-hover:hover {background-color:#0fb4a9 !important;}
-</style>
+<link href="{% static 'visitors/css/styles2.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-12 col-md-4">
             <div class="card" style="width: 15rem;">
-                <div class="card-body" style="background-color:#0fb4a9">
+                <div class="card-body">
+                    <img class="card-img-top mb-3" src="{% static 'visitors/image/default-profile.jpg' %}">
                     <h5 class="card-title text-center">{{user.first_name}} {{user.last_name}}</h5>
                     <p class="card-text text-center">{{user.email}}</p>
+                    <p class="card-text text-center">{{user.profile.phone}}</p>
+                    <p class="card-text text-center">{{user.profile.address}} {{user.profile.city}}</p>
+
                 </div>
                 <ul class="list-group list-group-flush">
-                    <a href ="{% url 'my_profile' %}" ><li class="list-group-item profile-hover">Profile</li></a>
-                    <li class="list-group-item profile-hover">Medical Profile</li>
-                    <li class="list-group-item profile-hover">Appointments</li>
-                    <li class="list-group-item profile-hover">Logout</li>
+                    <a href ="{% url 'my_profile' %}" style="text-decoration:none"><li class="list-group-item profile-hover">Profile</li></a>
+                    {% if user.medicalprofile.id %}
+                    <a href ="{% url 'medical_profile' user.medicalprofile.id %}" style="text-decoration:none"><li class="list-group-item profile-hover">Medical File</li></a>
+                    {% else %}
+                    <a href ="{% url 'add_medical' %}" style="text-decoration:none"><li class="list-group-item profile-hover">Fill Medical File</li></a>
+                    {% endif %}
+                    <a href ="{% url 'my_schedules' %}" style="text-decoration:none"><li class="list-group-item profile-hover">My Appointments</li></a>
+                    <a href ="{% url 'logout' %}" style="text-decoration:none"><li class="list-group-item profile-hover">Logout</li></a>
                 </ul>
             </div>
         </div>
@@ -39,7 +46,7 @@ My profile
                     <div class="col-1"></div>
                     {% endfor %}
                 </div>
-                <center><button class="btn fs-5" style="background-color:#193051;color:white">Save Changes</button></center>
+                <center><button class="btn fs-5 save-change"title="Save changes">Save Changes</button></center>
 
             </form>
         </div>

@@ -12,5 +12,9 @@ urlpatterns = [
     path('medicalProfile/complete/', views.MedicalProfileCreateView.as_view(), name='add_medical'),
     path('medicalProfile/<int:pk>', views.MedicalProfileDetailView.as_view(), name='medical_profile'),
     path('mySchedules/', MyAppointmentsView.as_view(), name='my_schedules'),
+    path('updateMedicalProfile/<int:pk>/', views.MedicalProfileUpdateView.as_view(), name='update_medical_profile'),
+    path('profiles/', views.ProfileViewList.as_view(), name='profiles'),
+    path('profiles/<int:pk>', views.ProfileDetailView.as_view(), name='detail_profile'),
+
 ]
 

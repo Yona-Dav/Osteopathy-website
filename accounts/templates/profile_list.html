@@ -1,0 +1,29 @@
+{% extends 'partials/base.html'%}
+{% load bootstrap5 %}
+{% block title %}
+Profiles
+{% endblock %}
+{%block content%}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-warning">{{message}}<br></div>
+{%endfor%}
+{%endif%}
+<div class="container">
+   <div class="row">
+     {% for profile in profiles %}
+     <div class="col-4">
+<div class="card">
+  <h5 class="card-header">{{profile.user.first_name}} {{profile.user.last_name}} ({{profile.user.username}})  <a href="#" class="card-link" title="delete profile"><i class="fas fa-trash-alt" style="color:red"></i></a></h5>
+  <div class="card-body">
+    <p class="card-text">Email: {{profile.user.email}}</p>
+    <p class="card-text"><a href="{% url 'detail_profile' profile.id%}">Profile</a></p>
+    <p class="card-text">Medical Profile</p>
+  </div>
+</div>
+    </div>
+
+{% endfor %}
+</div>
+</div>
+{% endblock %}
