@@ -1,0 +1,90 @@
+{% load static %}
+<nav class="navbar navbar-expand-sm navbar-light bg-light navcolor sticky-top">
+    <!--   test -->
+    <div class="container-fluid mx-auto order-0">
+        <img class="img-fluid  rounded-3 " src="{% static 'visitors/image/logo.jpg' %}" width=150vw height="250vh">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"  style="border:2px #0fb4a9 solid">
+            <span class="navbar-toggler-icon " ></span>
+        </button>
+        <div class="collapse navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarTogglerDemo02">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item me-3">
+                    <a class="nav-link" href="{% url 'about' %}" style="color:#193051">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#193051">
+                        Osteopathy
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'osteopathy' %}" style="color:#193051">What is Osteopathy?</a></li>
+                        <li><a class="dropdown-item" href="{% url 'osteopathy' %}#for_who" style="color:#193051">For Who ?</a></li>
+                        <li><a class="dropdown-item" href="#" style="color:#193051">Your first visit</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#193051">
+                        Questions&Reviews
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'common_questions' %}" style="color:#193051">Common Questions</a></li>
+                        {% if not user.is_staff %}
+                        <li><a class="dropdown-item" href="{% url 'ask_question' %}" style="color:#193051">Ask a question</a></li>
+                        {%else%}
+                        <li><a class="dropdown-item" href="{% url 'common_quest_form' %}" style="color:#193051">Add common question</a></li>
+                        {% endif %}
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'reviews' %}"  style="color:#193051">Reviews</a></li>
+                        {% if not user.is_staff %}
+                        <li><a class="dropdown-item" href="{% url 'add_review' %}" style="color:#193051">Leave a review</a></li>
+                        {%endif%}
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#193051">
+                        Book an appointment
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'schedules' %}" style="color:#193051">Schedules</a></li>
+                        {% if  user.is_staff %}
+                        <li><a class="dropdown-item" href="{% url 'add_schedule' %}" style="color:#193051">Add a schedule</a></li>
+                        <li><a class="dropdown-item" href="{% url 'booked_schedule' %}" style="color:#193051">Booked Schedules</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}"style="color:#193051" >Contact</a>
+                </li>
+                {%if not user.is_authenticated %}
+                <li class="nav-item">
+
+                    <a href="{% url 'login' %}" class="nav-link ">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'signup' %}" class="nav-link ">Sign Up</a>
+                </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#193051">
+                        Welcome <b style="color:#0fb4a9">{{user.username}}</b>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'my_profile' %}" style="color:#193051">Profile</a></li>
+                        {% if user.medicalprofile.id %}
+                        <li><a class="dropdown-item" href="{% url 'medical_profile' user.medicalprofile.id %}"  style="color:#193051">Medical File</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'add_medical' %}"  style="color:#193051">Fill Medical File</a></li>
+                        {% endif %}
+                        {% if not user.is_staff %}
+                        <li><a class="dropdown-item" href="{% url 'my_schedules' %}" style="color:#193051">My appointments</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" href="{% url 'logout' %}" style="color:#193051">Logout</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link fs-5" href="tel:+972505708866"style="color:#0fb4a9"><i class="fas fa-phone-alt " style="color:#0fb4a9"></i> 050-5708866</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

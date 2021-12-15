@@ -1,0 +1,17 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<div class="container me-5 ms-5 ">
+    <h1 class="text-center" style="color:#0fb4a9">Welcome to the Login page</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn fs-4" style="background-color:#0fb4a9">Login</button>
+    </form>
+</div>
+{% endblock %}

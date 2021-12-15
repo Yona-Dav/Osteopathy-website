@@ -1,0 +1,22 @@
+{% extends 'partials/base.html'%}
+{% load bootstrap5 %}
+{% load static %}
+{% block title%}Medical Profile{% endblock %}
+{% block content %}
+<div class="container ms-5 me-5">
+<h2>Medical Dossier</h2>
+
+{% if user.is_authenticated %}
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Reason: {{user.medicalprofile.reason_for_visit}}</li>
+  <li class="list-group-item">Symptoms that appear: {{user.medicalprofile.symptoms_appear}}</li>
+  <li class="list-group-item">Pain(scale 0 to 10): {{user.medicalprofile.rate_your_pain}}</li>
+  <li class="list-group-item">Area of pain: {{user.medicalprofile.area_of_pain}}</li>
+  <li class="list-group-item">Frequency of pain: {{user.medicalprofile.frequency_of_pain}}</li>
+</ul>
+    <a class="btn btn-success" href="#" >Update</a>
+
+{% endif %}
+
+</div>
+{% endblock %}

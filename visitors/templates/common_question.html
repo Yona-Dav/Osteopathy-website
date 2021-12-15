@@ -1,0 +1,41 @@
+{% extends 'partials/base.html'%}
+{% load bootstrap5 %}
+{% load static %}
+{% block title%}Common Questions{% endblock %}
+{% block content %}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-info">{{message}}<br></div>
+{%endfor%}
+{%endif%}
+<div class="container">
+  <h2 class="text-center" style="color:#193051"> Questions & Answers </h2>
+  {% if user.is_staff %}
+  <a href="{% url 'common_quest_form' %}" class="btn add_question" style="color:white;background-color:#193051">Add a question</a>
+  {%else%}
+  <a href="{% url 'ask_question' %}" class="btn add_question" style="color:white;background-color:#193051">Ask a question</a>
+  {%endif%}
+  {% for quest in questions %}
+  <div class="accordion pt-4">
+    <div class="accordion-item" >
+      <h2 class="accordion-header">
+        <button class="accordion-button fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{quest.id}}" aria-expanded="true" >
+          {{quest.question}}
+        </button>
+      </h2>
+      <div id="collapse{{quest.id}}" class="accordion-collapse collapse show" >
+        <div class="accordion-body">
+          {% if user.is_staff %}
+          <a href="{% url 'delete_question' quest.id %}" class='fst-italic delete_question' style="color:#0fb4a9; text-decoration: none">  Delete</a>
+          <a href="{% url 'update_question' quest.id %}" class='fst-italic delete_question' style="color:#193051; text-decoration: none">  Update</a>
+          {% endif %}
+          <p>{{quest.response}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+{%endblock%}

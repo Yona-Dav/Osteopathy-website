@@ -1,0 +1,39 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+Schedules Booked
+{% endblock %}
+
+{% block content %}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-info">{{message}}<br></div>
+{%endfor%}
+{%endif%}
+<div class="container">
+    <h2 class="text-center" style="color:#193051">Booked Schedules</h2>
+    {% if user.is_staff %}
+    <a href="{% url 'add_schedule' %}" class="btn" title="add a schedule" style="background-color:#0fb4a9">Add a schedule</a>
+
+    <div class="row mt-5">
+        {%for schedule in schedules %}
+        <div class="row fs-5">
+            {% ifchanged schedule.date|date%}
+            <hr>
+            <p></p>
+            <h3>{{schedule.date}}</h3>
+            {%endifchanged%}
+            <p class="card-item mb-2 "><i class="far fa-clock"></i> {{schedule.hour}} <i class="fas fa-arrow-right"></i> Patient <a href="#">{{schedule.owner}};</a>{{schedule.owner.profile.phone}}; <a href="mailto:{{schedule.owner.email}}">{{schedule.owner.email}}</a>
+                <a href="{% url 'update_schedule' schedule.id %}" class="card-link" title="update"><i class="fas fa-pen "style="color:green"></i></a>
+                <a href="{% url 'delete_schedule' schedule.id %}" class="card-link" title="delete"><i class="fas fa-trash-alt" style="color:red"></i></a></p>
+        </div>
+        {% empty %}
+        <h2>There are not booked schedules</h2>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>
+{%endblock%}
+
+

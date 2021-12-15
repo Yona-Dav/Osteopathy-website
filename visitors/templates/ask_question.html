@@ -1,0 +1,27 @@
+{% extends 'partials/base.html'%}
+{% load bootstrap5 %}
+{% load static %}
+{% block title%}Ask Question{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% if name %}
+        <div class="row d-flex align-items-center justify-content-center text-center ">
+            <h2>Thanks {{name}}</h2>
+            <h3>We received your email and will respond shortly</h3>
+        </div>
+        {% else %}
+        <h2 class="text-center" style="color:#193051"> ASK A QUESTION</h2>
+        <form class="contact pt-5 pb-3" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            {% bootstrap_field field show_label=False %}
+            {% endfor %}
+            <center><button class="btn fs-4" style="background-color:#193051;color:white">ASK</button></center>
+            <button type='reset' class="btn fs-4" style="background-color:#0fb4a9">Clear All</button>
+
+        </form>
+        {%endif%}
+    </div>
+</div>
+{% endblock%}

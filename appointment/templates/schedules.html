@@ -1,0 +1,222 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+Available Schedules
+{% endblock %}
+
+{% block content %}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-info">{{message}}<br></div>
+{%endfor%}
+{%endif%}
+<div class="container">
+    {% if user.is_authenticated %}
+    <h2 class="text-center" style="color:#193051">Available schedules</h2>
+    {% if user.is_staff %}
+    <a href="{% url 'add_schedule' %}" class="btn" title="add a schedule" style="background-color:#0fb4a9">Add a schedule</a>
+    {% endif %}
+    <p>The duration of the appointment is 50 minutes.</p>
+    <p>If you need more informations or if there are not available schedules, please contact me by mail or by phone.</p>
+    <div class="row mt-5">
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 10%}
+        {% ifchanged schedule.date.month %}<h4>OCTOBER</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 11%}
+        {% ifchanged schedule.date.month %}<h4>NOVEMBER</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 12%}
+        {% ifchanged schedule.date.month %}<h4>DECEMBER</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 1%}
+        {% ifchanged schedule.date.month %}<h4>JANUARY</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 2%}
+        {% ifchanged schedule.date.month %}<h4>FEBRUARY</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 3%}
+        {% ifchanged schedule.date.month %}<h4>MARCH</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 4%}
+        {% ifchanged schedule.date.month %}<h4>APRIL</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 5%}
+        {% ifchanged schedule.date.month %}<h4>MAY</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 6%}
+        {% ifchanged schedule.date.month %}<h4>JUNE</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 7%}
+        {% ifchanged schedule.date.month %}<h4>JULY</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 8%}
+        {% ifchanged schedule.date.month %}<h4>AUGUST</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+        {%for schedule in schedules %}
+        {% if schedule.date.month is 9%}
+        {% ifchanged schedule.date.month %}<h4>SEPTEMBER</h4>{% endifchanged%}
+        {% ifchanged schedule.date|date %}
+        <div class="me-3 mb-3 btn pt-0" style="width:5rem;border:1px solid grey;height:4rem;border-radius:10px">
+            <a href="{% url 'date_appointment' schedule.date %}" style="color:black; text-decoration:none ">
+                <div class="card-body pt-0 ps-0 pe-0 text-center">
+                    <div class="row">
+                        <h6>{{schedule.date | date:"l" |upper| slice:3}} <span class="badge bg-secondary"> {{schedule.date.day}}</span> {{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endifchanged %}
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center">
+        <h2>To book an appointment,</h2>
+        <h2>You have to <a href="{% url 'login' %}" class="btn" style="background-color:#193051; color:white">Login</a> or <a href="{% url 'signup' %}" class="btn" style="background-color:#0fb4a9">SignUp</a></h2>
+    </div>
+    {%endif%}
+</div>
+{%endblock%}

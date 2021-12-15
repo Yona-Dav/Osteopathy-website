@@ -1,0 +1,36 @@
+{% extends 'partials/base.html'%}
+{% load static %}
+{% block title%}Osteopathy{% endblock %}
+{% block css %}
+<link href="{% static 'visitors/css/styles2.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<div class="what_is">
+    <div class="row">
+        <h2 class="text-uppercase text-center fs-1" style="color:black">What is Osteopathy?</h2>
+    </div>
+</div>
+<div class="container mt-5">
+    <p>Osteopathy is a system of diagnosis and treatment for a wide range of medical conditions. Osteopaths work with the structure and function of the body, and work is based on the principle that the well-being of an individual depends on the skeleton, muscles, ligaments and connective tissues functioning smoothly together.</p>
+
+    <p>To an osteopath, for your body to work well, its structure must also work well. So osteopaths work to restore your body to a state of balance, where possible without the use of drugs or surgery. Osteopaths use touch, physical manipulation, stretching and massage to increase the mobility of joints, to relieve muscle tension, to enhance the blood and nerve supply to tissues, as well as helping your body’s own healing mechanisms. They may provide advice on posture and exercise to aid recovery, promote health and to prevent symptoms recurring. When surgery has been required, osteopathy is highly useful in returning the joint or muscles into health and in restoring movement.</p>
+</div>
+<div class="what_for mt-5" id="for_who">
+    <div class="row">
+        <h2 class="text-uppercase text-center fs-1" style="color:black">For Who?</h2>
+    </div>
+</div>
+
+
+<div class=" mt-5">
+    <center>
+        <h3> A little video</h3>
+        <video width='500' height= '300' controls>
+            <source src="{% static 'visitors/image/bande2.mp4' type='video/mp4' %}">
+            Your browser does not support the video tag.
+        </video>
+    </center>
+</div>
+
+{% endblock %}

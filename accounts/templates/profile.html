@@ -1,0 +1,48 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+My profile
+{% endblock %}
+{% block css %}
+<style>
+.profile-hover:hover {background-color:#0fb4a9 !important;}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-4">
+            <div class="card" style="width: 15rem;">
+                <div class="card-body" style="background-color:#0fb4a9">
+                    <h5 class="card-title text-center">{{user.first_name}} {{user.last_name}}</h5>
+                    <p class="card-text text-center">{{user.email}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <a href ="{% url 'my_profile' %}" ><li class="list-group-item profile-hover">Profile</li></a>
+                    <li class="list-group-item profile-hover">Medical Profile</li>
+                    <li class="list-group-item profile-hover">Appointments</li>
+                    <li class="list-group-item profile-hover">Logout</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-8">
+            <h2 class="text-center" style="color:#193051"> My profile</h2>
+            <form  method="post">
+                {% csrf_token %}
+                <div class="row pt-5 ">
+                    {% for field in form %}
+                    <div class="col-3 pt-2 text-end">{{field.label}}</div>
+
+                    <div class="col-8">
+                        {% bootstrap_field field show_label=False %}
+                    </div>
+                    <div class="col-1"></div>
+                    {% endfor %}
+                </div>
+                <center><button class="btn fs-5" style="background-color:#193051;color:white">Save Changes</button></center>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

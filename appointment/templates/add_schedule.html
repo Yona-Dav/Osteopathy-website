@@ -1,0 +1,19 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+Add Schedule
+{% endblock %}
+
+{% block content %}
+{% if user.is_staff %}
+<div class="container me-5 ms-5">
+    <h1 class="text-center" style="color:#0fb4a9">A new schedule</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn fs-4" style="background-color:#0fb4a9">Save</button>
+        <button type='reset' class="btn fs-4" style="background-color:#193051; color:white">Clear All</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}

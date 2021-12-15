@@ -1,0 +1,26 @@
+{% extends 'partials/base.html'%}
+{% load bootstrap5 %}
+{% load static %}
+{% block title%}Leave a Review{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% if name %}
+        <div class="row d-flex align-items-center justify-content-center text-center ">
+            <h2>Thanks {{name}} for your review</h2>
+            <h3>Our team has to validate the content before publishing</h3>
+            <h3>Thank you for your understanding</h3>
+        </div>
+        {% else %}
+        <h2 class="text-center" style="color:#193051"> LEAVE A REVIEW</h2>
+        <form class="contact pt-3 pb-3" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <center><button class="btn fs-4" style="background-color:#193051;color:white">ADD</button></center>
+            <button type='reset' class="btn fs-4" style="background-color:#0fb4a9">Clear All</button>
+
+        </form>
+        {%endif%}
+    </div>
+</div>
+{% endblock%}

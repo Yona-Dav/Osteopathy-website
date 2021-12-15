@@ -1,0 +1,7 @@
+.what_for{ background:url('/static/visitors/image/famille.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:top;
+        padding-top:80px;
+        padding-bottom:80px;
+        filter: opacity(50%);}

@@ -1,0 +1,44 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+Available Schedules By Date
+{% endblock %}
+
+{% block content %}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-info">{{message}}<br></div>
+{%endfor%}
+{%endif%}
+<div class="container">
+    {% if user.is_authenticated %}
+    <h2>Available schedules</h2>
+    <p>The duration of the appointment is 50 minutes.</p>
+    <p>If you need more informations or if there are not available schedules, please contact me by mail or by phone.</p>
+    <div class="row mt-5">
+        {%for schedule in schedules %}
+        <div class="card me-3 mb-3" style="width: 14rem;border:1px solid grey">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4 align-items-center">
+                        <h5><span class="badge bg-secondary">{{schedule.date.day}}</span></h5>
+                        <h6>{{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                    <div class="col-8" style="border-left:2px solid red">
+                        <p class="card-subtitle"><i class="fas fa-calendar-day" style="color:grey"></i>  {{schedule.date | date:"l" }}</p>
+                        <p class="card-item mb-2 text-muted"><i class="far fa-clock"></i> {{schedule.hour}}</p>
+                        {%if user.is_staff %}
+                        <a href="{% url 'update_schedule' schedule.id %}" class="card-link" title="update"><i class="fas fa-pen fa-2x"style="color:green"></i></a>
+                        <a href="{% url 'delete_schedule' schedule.id %}" class="card-link" title="delete"><i class="fas fa-trash-alt fa-2x" style="color:red"></i></a>
+                        {%else%}
+                        <a href="{% url 'book_appointment' schedule.id 1 %}"  class="card-link " title="book the appointment"><i class="fas fa-calendar-check "style="color:#0fb4a9"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {%endif%}
+</div>
+{%endblock%}

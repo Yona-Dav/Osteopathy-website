@@ -1,0 +1,38 @@
+.navcolor{color:red}
+
+.dropdown{color:#193051}
+
+.contact{background:url('/static/visitors/image/image.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: opacity(80%) ;}
+
+.contact-box{border: 2px solid #193051;
+             padding-left:10px;
+             padding-right:10px;
+             padding-top:10px;
+             background-color:#193051;
+             color:white}
+
+.what_is{ background:url('/static/visitors/image/osteo2.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:bottom;
+        padding-top:80px;
+        padding-bottom:80px;
+        filter: opacity(50%);}
+
+
+
+.accordion-header > .accordion-button{color:black !important;
+background-color:#0fb4a9;}
+
+.add_question:hover {transform: scale(1.1)}
+
+.delete_question:hover {transform: scale(1.1)}
+
+.checked {color: orange}
+
+
+
+

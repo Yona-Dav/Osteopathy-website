@@ -1,0 +1,32 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+My Schedules
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center" style="color:#193051">My Appointments</h2>
+    <div class="row mt-5">
+        {%for schedule in schedules %}
+        <div class="card me-3 mb-3" style="width: 14rem;border:1px solid grey">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4 align-items-center">
+                        <h5><span class="badge bg-secondary">{{schedule.date.day}}</span></h5>
+                        <h6>{{schedule.date | date:"F" |upper| slice:3}}</h6>
+                    </div>
+                    <div class="col-8" style="border-left:2px solid #0fb4a9">
+                        <p class="card-subtitle"><i class="fas fa-calendar-day" style="color:grey"></i>  {{schedule.date | date:"l" }}</p>
+                        <p class="card-item mb-2 text-muted"><i class="far fa-clock"></i> {{schedule.hour}}</p>
+                        <a href="{% url 'cancel_appointment' schedule.id 1 %}" class="card-link" title="cancel schedule"><i class="fas fa-window-close fa-1x"style="color:red"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <h2>You do not have any appointments</h2>
+        {% endfor %}
+    </div>
+</div>
+{%endblock%}

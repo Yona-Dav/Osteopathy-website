@@ -1,0 +1,22 @@
+{% extends 'partials/base.html'%}
+{% load bootstrap5 %}
+{% load static %}
+{% block title%}Add Common Question{% endblock %}
+{% block content %}
+{% if user.is_staff %}
+<div class="container">
+    <div class="row">
+        <h2 class="text-center" style="color:#193051"> ADD A COMMON QUESTION</h2>
+        <form class="contact pt-5 pb-3" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            {% bootstrap_field field show_label=False %}
+            {% endfor %}
+            <center><button class="btn fs-4" style="background-color:#193051;color:white">ADD</button></center>
+            <button type='reset' class="btn fs-4" style="background-color:#0fb4a9">Clear All</button>
+
+        </form>
+    </div>
+</div>
+{%endif%}
+{% endblock%}
