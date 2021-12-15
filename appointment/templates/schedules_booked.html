@@ -23,7 +23,7 @@ Schedules Booked
             <p></p>
             <h3>{{schedule.date}}</h3>
             {%endifchanged%}
-            <p class="card-item mb-2 "><i class="far fa-clock"></i> {{schedule.hour}} <i class="fas fa-arrow-right"></i> Patient <a href="#">{{schedule.owner}};</a>{{schedule.owner.profile.phone}}; <a href="mailto:{{schedule.owner.email}}">{{schedule.owner.email}}</a>
+            <p class="card-item mb-2 "><i class="far fa-clock"></i> {{schedule.hour}} <i class="fas fa-arrow-right"></i> Patient <a href="{% url 'detail_profile' schedule.owner.profile.id %}">{{schedule.owner}};</a>{{schedule.owner.profile.phone}}; <a href="mailto:{{schedule.owner.email}}">{{schedule.owner.email}}</a>
                 <a href="{% url 'update_schedule' schedule.id %}" class="card-link" title="update"><i class="fas fa-pen "style="color:green"></i></a>
                 <a href="{% url 'delete_schedule' schedule.id %}" class="card-link" title="delete"><i class="fas fa-trash-alt" style="color:red"></i></a></p>
         </div>

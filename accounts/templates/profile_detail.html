@@ -11,17 +11,46 @@ My profile
 <div class="container">
     <div class="row">
         <div class="card">
-            <h3 class="card-header">Information about {{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}}</h3>
+            <h3 class="card-header"style="background-color:#0fb4a9">Information about {{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}}</h3>
             <div class="card-body">
-                <h4 class="card-title">Profile</h4>
-                <p class="card-text">Username: {{profile.user.username}}</p>
-                <p class="card-text">Email: {{profile.user.email}}</p>
-                <p class="card-text">Phone Number: {{profile.phone}}</p>
-                <h4 class="card-title">Personal Information</h4>
-                <p class="card-text">Birth_date: {{profile.birth_date}}</p>
-                <p class="card-text">Gender: {{profile.gender}}</p>
-                <p class="card-text">Marital Status: {{profile.marital_status}}</p>
-
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Username:</span> {{profile.user.username}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Email:</span> {{profile.user.email}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Phone Number:</span> {{profile.phone}}</p>
+                <h4 class="card-title text-decoration-underline" style="color:#193051">Personal Information</h4>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Birth_date:</span> {{profile.birth_date}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Gender:</span> {{profile.gender}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Marital Status:</span> {{profile.marital_status}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Address:</span> {{profile.address}},{{profile.city}},{{profile.country}} </p>
+                {% if profile.user.medicalprofile.id%}
+                <h4 class="card-title text-decoration-underline" style="color:#193051">Medical Information</h4>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Reason for visit:</span> {{profile.user.medicalprofile.reason_for_visit}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Symptoms that appear:</span> {{profile.user.medicalprofile.symptoms_appear}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Pain (scale 0 to 10):</span> {{profile.user.medicalprofile.rate_your_pain}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Area of pain:</span> {{profile.user.medicalprofile.area_of_pain}} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Frequency of pain:</span> {{profile.user.medicalprofile.frequency_of_pain}} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Interfere with:</span> {% for int in profile.user.medicalprofile.interfere_with.all %}{{int}}- {% endfor %} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Activities that aggravate condition:</span> {% for int in profile.user.medicalprofile.activities_aggravate_condition.all %}{{int}}- {% endfor %} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Activities that make pain better:</span> {% for int in profile.user.medicalprofile.make_pain_better.all %}{{int}}- {% endfor %} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Symptoms:</span> {% for int in profile.user.medicalprofile.symptoms.all %}{{int}}- {% endfor %} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Suffered from the following medical condition:</span> {% for int in profile.user.medicalprofile.suffered_from_medical.all %}{{int}}- {% endfor %} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Family history:</span> {% for int in profile.user.medicalprofile.family_history.all %}{{int}}- {% endfor %} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Height:</span> {{profile.user.medicalprofile.height}} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Weight:</span> {{profile.user.medicalprofile.weight}} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">All surgical procedures:</span> {{profile.user.medicalprofile.height}} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Smoke:</span> {% if profile.user.medicalprofile.smoke is False %}No {%else%} Yes{%endif%} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Drink:</span> {% for int in profile.user.medicalprofile.drink.all %}{{int}}- {% endfor %} </p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Recreational drugs:</span> {% if profile.user.medicalprofile.recreational_drugs is False %}No {%else%} Yes{%endif%}  </p>
+                {%else%}
+                <h4 style="color:#193051">{{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}} did not fill the medical form</h4>
+                {% endif %}
+                <h4 class="card-title text-decoration-underline" style="color:#193051">All the Appointments</h4>
+                {% for sche in profile.user.schedule_set.all %}
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Date</span> {{sche.date}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Time:</span> {{sche.hour}}</p>
+                <hr>
+                {% empty %}
+                <h5>No appointments</h5>
+                {% endfor %}
             </div>
         </div>
     </div>

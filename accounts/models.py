@@ -16,6 +16,9 @@ class Profile(models.Model):
     city = models.CharField(max_length=100, blank=True)
     country = models.CharField(max_length=100, blank=True)
 
+    class Meta:
+        ordering = ['user__last_name', 'user__first_name']
+
 
 class FrequencyPain(models.Model):
     name = models.CharField(max_length=100)

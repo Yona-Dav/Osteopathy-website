@@ -10,15 +10,16 @@ Profiles
 {%endfor%}
 {%endif%}
 <div class="container">
-   <div class="row">
+    <h2 class="text-center" style="color:#193051">All the profiles</h2>
+   <div class="row mt-5">
      {% for profile in profiles %}
      <div class="col-4">
 <div class="card">
-  <h5 class="card-header">{{profile.user.first_name}} {{profile.user.last_name}} ({{profile.user.username}})  <a href="#" class="card-link" title="delete profile"><i class="fas fa-trash-alt" style="color:red"></i></a></h5>
+  <h5 class="card-header">{{profile.user.first_name}} {{profile.user.last_name}} ({{profile.user.username}})  <a href="#" class="card-link" title="delete profile"><i class="fas fa-trash-alt" style="color:red"></i></a>
+  <a href="{% url 'detail_profile' profile.id%}" class="card-link" title="delete profile"><i class="fas fa-eye" style="color:green"></i></a></h5>
   <div class="card-body">
-    <p class="card-text">Email: {{profile.user.email}}</p>
-    <p class="card-text"><a href="{% url 'detail_profile' profile.id%}">Profile</a></p>
-    <p class="card-text">Medical Profile</p>
+    <p class="card-text">{{profile.user.email}}</p>
+    <p class="card-text">{{profile.phone}}</p>
   </div>
 </div>
     </div>
