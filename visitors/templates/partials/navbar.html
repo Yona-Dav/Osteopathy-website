@@ -76,7 +76,7 @@
                         <li><a class="dropdown-item" href="{% url 'add_medical' %}"  style="color:#193051">Fill Medical File</a></li>
                         {% endif %}
                         <li><a class="dropdown-item" href="{% url 'my_schedules' %}" style="color:#193051">My appointments</a></li>
-                        <li><a class="dropdown-item" href="#" style="color:#193051">My Exercises</a></li>
+                        <li><a class="dropdown-item" href="{% url 'my_exercises' user.id %}" style="color:#193051">My Exercises</a></li>
                         {% else %}
                         <li><a class="dropdown-item" href="{% url 'profiles' %}" style="color:#193051">Profiles</a></li>
                         <li><a class="dropdown-item" href="{% url 'exercises' %}" style="color:#193051">Exercises</a></li>

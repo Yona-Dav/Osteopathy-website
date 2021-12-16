@@ -28,7 +28,7 @@ My profile
                     <a href ="{% url 'add_medical' %}" style="text-decoration:none"><li class="list-group-item profile-hover">Fill Medical File</li></a>
                     {% endif %}
                     <a href ="{% url 'my_schedules' %}" style="text-decoration:none"><li class="list-group-item profile-hover">My Appointments</li></a>
-                    <a href ="#" style="text-decoration:none"><li class="list-group-item profile-hover">My Exercises</li></a>
+                    <a href ="{% url 'my_exercises' user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover">My Exercises</li></a>
                     <a href ="{% url 'logout' %}" style="text-decoration:none"><li class="list-group-item profile-hover">Logout</li></a>
                 </ul>
             </div>

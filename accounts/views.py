@@ -7,8 +7,7 @@ from django.contrib.auth.models import User
 from .forms import SignupForm, MyAuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -18,6 +17,8 @@ from django.core.mail import EmailMessage, send_mail
 from visitors.tokens import account_activation_token
 from django.http import HttpResponse
 from .forms import ProfileForm, MedicalProfileForm
+from staff.models import Exercise
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -130,5 +131,11 @@ class ProfileDetailView(DetailView, UserPassesTestMixin):
 
     def test_func(self):
         return self.request.user.is_staff
+
+@login_required
+def see_my_exercises(request, user_id):
+    exercises = Exercise.objects.filter(user=user_id)
+    return render(request, 'my_exercises.html', {'exercises':exercises})
+
 
 

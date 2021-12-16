@@ -15,6 +15,7 @@ urlpatterns = [
     path('updateMedicalProfile/<int:pk>/', views.MedicalProfileUpdateView.as_view(), name='update_medical_profile'),
     path('profiles/', views.ProfileViewList.as_view(), name='profiles'),
     path('profiles/<int:pk>', views.ProfileDetailView.as_view(), name='detail_profile'),
+    path('MyExercises/<int:user_id>/', views.see_my_exercises, name='my_exercises')
 
 ]
 

@@ -52,12 +52,7 @@ My profile
                 <h5>No appointments</h5>
                 {% endfor %}
                 <h4 class="card-title text-decoration-underline" style="color:#193051">All the Exercises</h4>
-                {% for ex in profile.user.exercise.all %}
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Title</span> {{ex.title}}</p>
-                <hr>
-                {% empty %}
-                <h5>No Exercises</h5>
-                {% endfor %}
+                <a href ="{% url 'my_exercises' profile.user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover">My Exercises</li></a>
             </div>
         </div>
     </div>

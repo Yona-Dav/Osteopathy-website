@@ -145,4 +145,13 @@ class CategoryListView(ListView):
     context_object_name = 'categories'
 
 
+class ExerciseDetailView(DetailView,UserPassesTestMixin):
+    model = Exercise
+    template_name = 'exercise_detail.html'
+    context_object_name = 'exercise'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
 
