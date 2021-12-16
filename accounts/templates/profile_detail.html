@@ -18,7 +18,7 @@ My profile
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Phone Number:</span> {{profile.phone}}</p>
                 <h4 class="card-title text-decoration-underline" style="color:#193051">Personal Information</h4>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Birth_date:</span> {{profile.birth_date}}</p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Gender:</span> {{profile.gender}}</p>
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Gender:</span> {{profile.sex}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Marital Status:</span> {{profile.marital_status}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Address:</span> {{profile.address}},{{profile.city}},{{profile.country}} </p>
                 {% if profile.user.medicalprofile.id%}
@@ -50,6 +50,13 @@ My profile
                 <hr>
                 {% empty %}
                 <h5>No appointments</h5>
+                {% endfor %}
+                <h4 class="card-title text-decoration-underline" style="color:#193051">All the Exercises</h4>
+                {% for ex in profile.user.exercise.all %}
+                <p class="card-text"><span class="fw-bold" style="color:#193051">Title</span> {{ex.title}}</p>
+                <hr>
+                {% empty %}
+                <h5>No Exercises</h5>
                 {% endfor %}
             </div>
         </div>

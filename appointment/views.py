@@ -106,7 +106,7 @@ class MyAppointmentsView(LoginRequiredMixin, ListView):
     context_object_name = 'schedules'
 
     def get_queryset(self):
-        return super(MyAppointmentsView, self).get_queryset().filter(owner=self.request.user)
+        return super(MyAppointmentsView, self).get_queryset().filter(owner=self.request.user).filter(Q(date__gt=datetime.today()) | Q(date=datetime.today(), hour__gt=datetime.now().time()))
 
 
 @login_required

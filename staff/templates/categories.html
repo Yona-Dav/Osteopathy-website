@@ -1,0 +1,35 @@
+{% extends 'partials/base.html'%}
+{% load bootstrap5 %}
+{% load static %}
+{% block title%}Category{% endblock %}
+{% block css %}
+<style>
+.category:hover {background-color:#0fb4a9 ; color:white}
+</style>
+{%endblock %}
+{% block content %}
+{% if user.is_staff %}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-info">{{message}}<br></div>
+{%endfor%}
+{%endif%}
+<div class="container">
+    <h2 class="text-center">All the Exercises</h2>
+    <a class="btn mt-5" href="{% url 'add_exercise' %}" style="background-color:#0fb4a9">Add Exercises</a>
+    <a class="btn mt-5 " href="{% url 'exercises' %}" style="background-color:#193051;color:white">By Category</a>
+    <div class="row mt-5">
+        <div class="d-flex flex-wrap justify-content-around">
+        {% for cat in categories %}
+        <a class="category pt-4 pb-4 ps-4 pe-4 rounded-1 fs-2 mt-5" href="{% url 'category_exercises' cat.id %}" style="color:black; text-decoration:none; border:2px solid #0fb4a9">
+            <div>  {{cat.name}} </div>  </a>
+
+        {%endfor%}
+            </div>
+
+
+
+    </div>
+</div>
+{% endif %}
+{% endblock %}

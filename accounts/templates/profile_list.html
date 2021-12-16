@@ -16,7 +16,7 @@ Profiles
      <div class="col-4">
 <div class="card">
   <h5 class="card-header">{{profile.user.first_name}} {{profile.user.last_name}} ({{profile.user.username}})  <a href="#" class="card-link" title="delete profile"><i class="fas fa-trash-alt" style="color:red"></i></a>
-  <a href="{% url 'detail_profile' profile.id%}" class="card-link" title="delete profile"><i class="fas fa-eye" style="color:green"></i></a></h5>
+  <a href="{% url 'detail_profile' profile.id%}" class="card-link" title="see profile"><i class="fas fa-eye" style="color:green"></i></a></h5>
   <div class="card-body">
     <p class="card-text">{{profile.user.email}}</p>
     <p class="card-text">{{profile.phone}}</p>

@@ -54,11 +54,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contact' %}"style="color:#193051" >Contact</a>
                 </li>
-                {% if user.is_staff %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profiles' %}"style="color:#193051" >Profiles</a>
-                </li>
-                {%endif%}
                 {%if not user.is_authenticated %}
                 <li class="nav-item">
 
@@ -73,14 +68,19 @@
                         Welcome <b style="color:#0fb4a9">{{user.username}}</b>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if not user.is_staff %}
                         <li><a class="dropdown-item" href="{% url 'my_profile' %}" style="color:#193051">Profile</a></li>
                         {% if user.medicalprofile.id %}
                         <li><a class="dropdown-item" href="{% url 'medical_profile' user.medicalprofile.id %}"  style="color:#193051">Medical File</a></li>
                         {% else %}
                         <li><a class="dropdown-item" href="{% url 'add_medical' %}"  style="color:#193051">Fill Medical File</a></li>
                         {% endif %}
-                        {% if not user.is_staff %}
                         <li><a class="dropdown-item" href="{% url 'my_schedules' %}" style="color:#193051">My appointments</a></li>
+                        <li><a class="dropdown-item" href="#" style="color:#193051">My Exercises</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'profiles' %}" style="color:#193051">Profiles</a></li>
+                        <li><a class="dropdown-item" href="{% url 'exercises' %}" style="color:#193051">Exercises</a></li>
+                        <li><a class="dropdown-item" href="{% url 'add_exercise' %}" style="color:#193051">Add Exercises</a></li>
                         {% endif %}
                         <li><a class="dropdown-item" href="{% url 'logout' %}" style="color:#193051">Logout</a></li>
                     </ul>

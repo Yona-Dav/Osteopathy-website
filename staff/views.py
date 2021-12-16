@@ -7,6 +7,8 @@ from django.urls import reverse_lazy
 from visitors.models import CommonQuestion, Review
 from visitors.forms import CommonQuestionForm
 from django.contrib.admin.views.decorators import staff_member_required
+from .models import Exercise, Category
+from .forms import ExerciseForm
 # Create your views here.
 
 
@@ -79,3 +81,68 @@ class ReviewDeleteView(DeleteView, UserPassesTestMixin):
 
     def test_func(self):
         return self.request.user.is_staff
+
+
+class ExerciseCreateView(CreateView, UserPassesTestMixin):
+    template_name = 'add_exercise.html'
+    success_url = reverse_lazy('exercises')
+    model = Exercise
+    form_class = ExerciseForm
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def form_valid(self, form):
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class ExerciseDeleteView(DeleteView, UserPassesTestMixin):
+    model = Exercise
+    template_name = 'delete_view.html'
+    success_url = reverse_lazy('exercises')
+    success_message = "The video was deleted successfully"
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(self.request, self.success_message  % obj.__dict__)
+        return super(ExerciseDeleteView, self).delete(request, *args, **kwargs)
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class ExerciseUpdateView(UpdateView, UserPassesTestMixin):
+    template_name = 'add_exercise.html'
+    model = Exercise
+    form_class = ExerciseForm
+    success_url = reverse_lazy('exercises')
+
+    def form_valid(self, form):
+        self.object= form.save(commit=False)
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class ExerciseListView(ListView):
+    model = Exercise
+    template_name = 'exercises.html'
+    context_object_name = 'exercises'
+
+
+@staff_member_required
+def category_exercises(request, category_id):
+    exercises = Exercise.objects.filter(category=category_id)
+    return render(request, 'exercise_by_category.html', {'exercises':exercises})
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'categories.html'
+    context_object_name = 'categories'
+
+
+

@@ -141,3 +141,5 @@ staticfiles/
 profile_pic/
 
 static/visitors/image/
+
+media/
