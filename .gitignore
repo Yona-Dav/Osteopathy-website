@@ -143,3 +143,5 @@ profile_pic/
 static/visitors/image/
 
 media/
+cert.crt
+cert.key
