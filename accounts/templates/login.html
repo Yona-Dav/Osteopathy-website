@@ -8,10 +8,16 @@ Login
 <div class="container me-5 ms-5 ">
     <h1 class="text-center" style="color:#0fb4a9">Welcome to the Login page</h1>
 
-    <form method="post">
+    <form method="post" class="mb-3">
         {% csrf_token %}
         {% bootstrap_form form %}
         <button class="btn fs-4" style="background-color:#0fb4a9">Login</button>
     </form>
+    <p><a class="text-decoration-none" href="{% url 'password_change' %}" style="color:#0fb4a9">Change Password</a></p>
+    <p><a class="text-decoration-none" href="{% url 'password_reset' %}" style="color:#0fb4a9">Forgotten your Password</a></p>
+</div>
+<div class="social">
+    <center><p class="facebook"><a href="{% url 'social:begin' 'facebook' %}"  class="fb_text text-decoration-none"><i class="fab fa-facebook"></i>   Sign in with Facebook</a></p></center>
+    <center><p class="google"><a href="{% url 'social:begin' 'google-oauth2' %}"  class="google_text text-decoration-none"><i class="fab fa-google"></i>   Sign in with Google</a></p></center>
 </div>
 {% endblock %}

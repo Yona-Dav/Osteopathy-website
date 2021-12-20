@@ -16,6 +16,6 @@ urlpatterns = [
     path('exercise/', views.ExerciseListView.as_view(), name='exercises'),
     path('exercises/category/<int:category_id>/', views.category_exercises, name='category_exercises'),
     path('exercises/category/', views.CategoryListView.as_view(), name='categories'),
-    path('exercises/detail/<int:pk>/',views.ExerciseDetailView.as_view(), name='detail_ex')
+    path('exercises/detail/<int:pk>/',views.ExerciseDetailView.as_view(), name='detail_ex'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Schedule
+from .models import Schedule, Report
 from django.views.generic import CreateView, UpdateView, DetailView, ListView, View, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
 from .forms import ScheduleForm
@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from accounts.models import User
+from accounts.models import User, Profile
 from datetime import datetime
 from django.db.models import Q
 from django.core.mail import EmailMessage, send_mail
@@ -127,6 +127,47 @@ def see_date_appointment(request, date_id):
     return render(request, 'schedule_by_date.html', {'schedules':schedules})
 
 
+class ReportCreateView(UserPassesTestMixin, CreateView):
+    model = Report
+    fields = ['content']
+    template_name = 'new_report.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        profile_id = self.kwargs['profile_id']
+        profile = Profile.objects.get(id=profile_id)
+        self.object.profile = profile
+        schedule_id = self.kwargs['schedule_id']
+        schedule = Schedule.objects.get(id=schedule_id)
+        self.object.schedule = schedule
+        self.object.save()
+        return super().form_valid(form)
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def get_success_url(self):
+        profile_id = self.kwargs['profile_id']
+        return reverse_lazy('detail_profile', kwargs={'pk': profile_id})
+
+
+class ReportUpdateView(UserPassesTestMixin,UpdateView):
+    model = Report
+    fields = ['content']
+    template_name = 'new_report.html'
+
+    def get_success_url(self):
+        rep_id = self.kwargs['pk']
+        rep = Report.objects.get(id=rep_id)
+        profile_id = rep.profile.id
+        return reverse_lazy('detail_profile', kwargs={'pk': profile_id})
+
+    def form_valid(self, form):
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def test_func(self):
+        return self.request.user.is_staff
 
 
 

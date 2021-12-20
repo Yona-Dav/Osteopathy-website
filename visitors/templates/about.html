@@ -1,4 +1,5 @@
 {% extends 'partials/base.html'%}
+{% load bootstrap5 %}
 {% load static %}
 {% block title%}About{% endblock %}
 {% block css %}
@@ -48,6 +49,21 @@
         </div>
     </div>
 </div>
+<div class="row contact mt-5">
+    <h2 class="text-center fs-1" style="color:#193051">Contact</h2>
+    <form class='ms-3' method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <div class="row container">
+            {% for field in form %}
+            <div class="col-md-6 col-12">
+                {% bootstrap_field field show_label=False %}
+            </div>
+            {% endfor %}
+        </div>
+        <center><button class="btn fs-4 mb-3" style="background-color:#193051;color:white">Contact</button></center>
+    </form>
+</div>
+
 
 
 {% endblock %}

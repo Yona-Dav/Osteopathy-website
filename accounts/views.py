@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView, ListView, View, DeleteView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView,PasswordChangeDoneView, PasswordResetView, PasswordResetConfirmView,PasswordResetCompleteView,PasswordResetDoneView
 from .models import Profile, MedicalProfile
 from django.contrib.auth.models import User
 from .forms import SignupForm, MyAuthenticationForm
@@ -19,6 +19,7 @@ from django.http import HttpResponse
 from .forms import ProfileForm, MedicalProfileForm
 from staff.models import Exercise
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 # Create your views here.
@@ -134,8 +135,59 @@ class ProfileDetailView(DetailView, UserPassesTestMixin):
 
 @login_required
 def see_my_exercises(request, user_id):
-    exercises = Exercise.objects.filter(user=user_id)
-    return render(request, 'my_exercises.html', {'exercises':exercises})
+    my_exercises = Exercise.objects.filter(user=user_id)
+    return render(request, 'my_exercises.html', {'my_exercises':my_exercises, 'userid': user_id , 'exercises':Exercise.objects.exclude(user=user_id)})
 
 
+@ staff_member_required
+def remove_exercise_from_user(request, exercise_id, user_id):
+    exercise = get_object_or_404(Exercise, id=exercise_id)
+    user = get_object_or_404(User, id=user_id)
+    user.exercise_set.remove(exercise)
+    return redirect('my_exercises', user_id)
 
+
+@ staff_member_required
+def add_exercise_to_user(request,user_id,exercise_id,):
+    exercise = get_object_or_404(Exercise, id=exercise_id)
+    user = get_object_or_404(User, id=user_id)
+    user.exercise_set.add(exercise)
+    return redirect('my_exercises', user_id)
+
+
+@ staff_member_required
+def deactivate_profile(request,user_id):
+    user = User.objects.get(id=user_id)
+    user.is_active = False
+    user.save()
+    messages.success(request, 'Profile successfully disabled.')
+    return redirect('profiles')
+
+
+class ChangePasswordView(PasswordChangeView, LoginRequiredMixin):
+    template_name = 'password_change.html'
+    success_url = reverse_lazy('password_change_done')
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class DonePasswordView(PasswordChangeDoneView, LoginRequiredMixin):
+    template_name = 'password_change_done.html'
+
+
+class ResetPassword(PasswordResetView):
+    template_name = 'password_reset_form.html'
+    email_template_name = 'password_reset_email.html'
+
+
+class ResetDonePassword(PasswordResetDoneView):
+    template_name = 'password_reset_done.html'
+
+
+class ConfirmResetPassword(PasswordResetConfirmView):
+    template_name= 'password_reset_confirm.html'
+
+
+class CompleteResetPassword(PasswordResetCompleteView):
+    template_name= 'password_complete.html'

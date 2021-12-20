@@ -9,6 +9,8 @@ urlpatterns = [
     path('bookedSchedule/', views.ScheduleBookedView.as_view(), name='booked_schedule'),
     path('schedule/<int:schedule_id>/<int:booked>/', views.book_appointment, name='book_appointment'),
     path('mySchedules/<int:schedule_id>/<int:canceled>/', views.cancel_appointment, name='cancel_appointment'),
-    path('schedule/date/<slug:date_id>/', views.see_date_appointment, name='date_appointment')
+    path('schedule/date/<slug:date_id>/', views.see_date_appointment, name='date_appointment'),
+    path('report/create/<int:profile_id>/<int:schedule_id>/', views.ReportCreateView.as_view(), name='new_report'),
+    path('updateReport/<int:pk>/', views.ReportUpdateView.as_view(), name='update_report'),
 
 ]

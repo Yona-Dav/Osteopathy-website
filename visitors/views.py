@@ -11,11 +11,6 @@ from django.contrib import messages
 
 # Create your views here.
 
-
-def about(request):
-    return render(request, 'about.html')
-
-
 class ContactCreateView(CreateView):
     model = Contact
     form_class = ContactForm
@@ -31,15 +26,20 @@ class ContactCreateView(CreateView):
         })
         from_email = form.cleaned_data.get('email')
         email = EmailMessage(
-            mail_subject, message, from_email=from_email, to=['ydavid256@gmail.com']
+            mail_subject, message, from_email=from_email, to=['yona.bohbot@gmail.com']
         )
         email.send()
 
         return render(self.request, 'contact.html', {'name':name})
 
 
-def osteopathy(request):
-    return render(request, 'osteopathy.html')
+class About(ContactCreateView):
+    template_name = 'about.html'
+
+
+class Osteopathy(ContactCreateView):
+    template_name = 'osteopathy.html'
+
 
 
 class CommonQuestionView(ListView):

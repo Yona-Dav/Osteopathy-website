@@ -1,4 +1,5 @@
 {% extends 'partials/base.html'%}
+{% load bootstrap5 %}
 {% load static %}
 {% block title%}Osteopathy{% endblock %}
 {% block css %}
@@ -22,121 +23,70 @@
     </div>
 </div>
 <div class="container mt-5">
-    <div class="card mb-3" style="border-color:transparent">
-        <div class="row g-0">
-            <div class="col-md-4" style="background:url('/static/visitors/image/neck_pain2.jpg');background-repeat: no-repeat;background-size: cover;">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4 class="card-title">Neck pain</h4>
-                    <p class="card-text">One of the most common problems we see in our clinic is neck pain.The neck is a very complex part of the body and is made up of many delicate and pain sensitive structures like muscles, joints, nerves, discs, ligaments and tendons.Your neck has to work pretty hard when you consider your head weighs around 5Kgs.</p>
-                </div>
-            </div>
-        </div>
+    <h4 class="card-title">Neck pain</h4>
+    <div class="clearfix mb-5">
+        <img src="{% static 'visitors/image/neck_pain2.jpg' %}" class="float-md-end mb-3 ms-md-3" height="150vh" width="300vw">
+        <p class="card-text">One of the most common problems we see in our clinic is neck pain.The neck is a very complex part of the body and is made up of many delicate and pain sensitive structures like muscles, joints, nerves, discs, ligaments and tendons.Your neck has to work pretty hard when you consider your head weighs around 5Kgs.</p>
     </div>
-    <div class="card mb-3" style="border-color:transparent">
-        <div class="row g-0">
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4 class="card-title">Headache & Migraine</h4>
-                    <p class="card-text">Headaches and migraine can leave you feeling helpless. But often there are things we can do to help improve or prevent the pain of a headache without the use of heavy medication.Regular stretching, exercise and hands-on treatment may bring so much relief you would wonder why you never tried these simple ideas before.</p>
-                </div>
-            </div>
-            <div class="col-md-4" style="background:url('/static/visitors/image/headache.jpg');background-repeat: no-repeat;background-size: cover;">
-            </div>
-        </div>
+    <h4 class="card-title">Headache & Migraine</h4>
+    <div class="clearfix mb-5">
+        <img src="{% static 'visitors/image/headache.jpg' %}" class="float-md-end mb-3 ms-md-3" height="150vh" width="300vw">
+        <p class="card-text">Headaches and migraine can leave you feeling helpless. But often there are things we can do to help improve or prevent the pain of a headache without the use of heavy medication.Regular stretching, exercise and hands-on treatment may bring so much relief you would wonder why you never tried these simple ideas before.</p>
     </div>
-    <div class="card mb-3" style="border-color:transparent">
-        <div class="row g-0">
-            <div class="col-md-4" style="background:url('/static/visitors/image/back_pain2.jpg');background-repeat: no-repeat;background-size: cover;">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4 class="card-title">Back pain</h4>
-                    <p class="card-text">Pain in the upper back (Thoracic), lower back(Lumbar) and tailbone (Sacrum/Coccyx) are very common and can easily affect your quality of life making normal daily tasks, like sitting, standing, and bending difficult.It is estimated that 70-90% of people will experience back pain at some point in their lives.
-                        The back is comprised of many sensitive structures that play a pivotal role on the way we move. These include bones (vertebra and ribs), muscles, spinal discs, ligaments, tendons, nerves and other connective tissue like fascia. Back pain can be associated with injury or inflammation with any of these structures.</p>
-                    <p class="card-text">We specialise in assessing and accurately diagnosing the cause of your back pain. There may be many factors that contribute to your symptoms and our experienced practitioners will help identify and address these issues. Treatment at our clinic will involve fixing the underlying cause of your back pain.</p>
-                </div>
-            </div>
-        </div>
+    <h4 class="card-title">Back pain</h4>
+    <div class="clearfix mb-5">
+        <img src="{% static 'visitors/image/back_pain2.jpg' %}" class="float-md-end mb-3 ms-md-3" height="300vh" width="300vw">
+
+        <p class="card-text">Pain in the upper back (Thoracic), lower back(Lumbar) and tailbone (Sacrum/Coccyx) are very common and can easily affect your quality of life making normal daily tasks, like sitting, standing, and bending difficult.It is estimated that 70-90% of people will experience back pain at some point in their lives.
+            The back is comprised of many sensitive structures that play a pivotal role on the way we move. These include bones (vertebra and ribs), muscles, spinal discs, ligaments, tendons, nerves and other connective tissue like fascia. Back pain can be associated with injury or inflammation with any of these structures.</p>
+        <p class="card-text">We specialise in assessing and accurately diagnosing the cause of your back pain. There may be many factors that contribute to your symptoms and our experienced practitioners will help identify and address these issues. Treatment at our clinic will involve fixing the underlying cause of your back pain.</p>
     </div>
-    <div class="card mb-3" style="border-color:transparent">
-        <div class="row g-0">
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4 class="card-title">Sports Injuries</h4>
-                    <p class="card-text">Injuries sustained while playing sport can vary from mild sprain/strain type injuries to more severe tears/instabilities and fractures.Our practitioners are highly skilled at assessing, diagnosing and treating all types of sports injuries. According to Sports Medicine Australia (SMA) 1 in 17 Australians suffer from injuries sustained during sports.
-                        The most common sports injuries are soft tissue injuries. These involve structures like muscles, ligaments, tendons, fascia, and nerves. These are commonly injured via a strain, sprain or direct blow</p>
-                    <p class="card-text">Sports injuries should always be assessed by a qualified practitioner. We will be able to manage your recovery with hands on therapy and the appropriate rehabilitation program to get you back to playing sport in the shortest possible time.</p>
-                </div>
-            </div>
-            <div class="col-md-4"style="background:url('/static/visitors/image/sporting.png');background-repeat: no-repeat;background-size: cover;">
-            </div>
-        </div>
+    <h4 class="card-title">Sports Injuries</h4>
+    <div class="clearfix mb-5">
+        <img src="{% static 'visitors/image/sporting.png' %}" class="float-md-end mb-3 ms-md-3" height="300vh" width="300vw">
+
+        <p class="card-text">Injuries sustained while playing sport can vary from mild sprain/strain type injuries to more severe tears/instabilities and fractures.Our practitioners are highly skilled at assessing, diagnosing and treating all types of sports injuries. According to Sports Medicine Australia (SMA) 1 in 17 Australians suffer from injuries sustained during sports.
+            The most common sports injuries are soft tissue injuries. These involve structures like muscles, ligaments, tendons, fascia, and nerves. These are commonly injured via a strain, sprain or direct blow</p>
+        <p class="card-text">Sports injuries should always be assessed by a qualified practitioner. We will be able to manage your recovery with hands on therapy and the appropriate rehabilitation program to get you back to playing sport in the shortest possible time.</p>
     </div>
-    <div class="card mb-3" style="border-color:transparent">
-        <div class="row g-0">
-            <div class="col-md-4" style="background:url('/static/visitors/image/sciatica.jpg');background-repeat: no-repeat;background-size: cover;">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4 class="card-title">Sciatica & Leg pain</h4>
-                    <p class="card-text">Pain into the buttock, legs, calves and feet is often referred to as Sciatica (irritation of the Sciatic nerve). Did you know, there are many causes for pain felt in leg, not just irritation of your sciatic nerve?We experienced and trained practitioners are able to assess, accurately identify and help manage the cause of your leg pain.</p>
-                </div>
-            </div>
-        </div>
+    <h4 class="card-title">Sciatica & Leg pain</h4>
+    <div class="clearfix mb-5">
+        <img src="{% static 'visitors/image/sciatica.jpg' %}" class="float-md-end mb-3 ms-md-3" height="150vh" width="300vw">
+        <p class="card-text">Pain into the buttock, legs, calves and feet is often referred to as Sciatica (irritation of the Sciatic nerve). Did you know, there are many causes for pain felt in leg, not just irritation of your sciatic nerve?We experienced and trained practitioners are able to assess, accurately identify and help manage the cause of your leg pain.</p>
     </div>
-    <div class="card mb-3" style="border-color:transparent">
-        <div class="row g-0">
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4 class="card-title">Pregnancy related pain & pelvic instability</h4>
-                    <p class="card-text">Expecting a child is a very special time in your life. Just like any other stress on your body, pregnancy can often be associated with pain and discomfort. With a lot of experience behind us we understand the pregnant body and only use safe and effective treatment techniques in order to help you feel better.</p>
-                </div>
-            </div>
-            <div class="col-md-4" style="background:url('/static/visitors/image/pregnancy.jpg');background-repeat: no-repeat;background-size: cover;">
-            </div>
-        </div>
+    <h4 class="card-title">Pregnancy related pain & pelvic instability</h4>
+    <div class="clearfix mb-5">
+        <img src="{% static 'visitors/image/pregnancy.jpg' %}" class="float-md-end mb-3 ms-md-3" height="150vh" width="300vw">
+
+        <p class="card-text">Expecting a child is a very special time in your life. Just like any other stress on your body, pregnancy can often be associated with pain and discomfort. With a lot of experience behind us we understand the pregnant body and only use safe and effective treatment techniques in order to help you feel better.</p>
     </div>
-    <div class="card mb-3" style="border-color:transparent">
-        <div class="row g-0">
-            <div class="col-md-4" style="background:url('/static/visitors/image/posture.jpg');background-repeat: no-repeat;background-size: cover;">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4 class="card-title">Posture and Ergonomics</h4>
-                    <p class="card-text">Most of us spend many hours a day sitting. Some research suggests we spend half our day sitting , and that it can affect your ability to perform normal tasks like, standing, walking, running and jumping . Sitting for long periods of time in the wrong position and poor posture can even cause;</p>
-                    <ol>
-                    <li class="card-text">Pressure on the disc between the bones of your spine</li>
-                    <li class="card-text">Reduced function and mobility of your spine</li>
-                    <li class="card-text">Increase inflammation leading to pain</li>
-                    <li class="card-text">Slows the body’s processing of fat</li>
-                    <li class="card-text">Leg and buttock muscles weaken</li>
-                    </ol>
-                    <p class="card-text">We use a wide range of techniques in order to help alleviate the pain you may have from increased sitting and poor posture.</p>
-                </div>
-            </div>
-        </div>
+    <h4 class="card-title">Posture and Ergonomics</h4>
+    <div class="clearfix mb-5">
+        <img src="{% static 'visitors/image/posture.jpg' %}" class="float-md-end mb-3 ms-md-3">
+
+        <p class="card-text">Most of us spend many hours a day sitting. Some research suggests we spend half our day sitting , and that it can affect your ability to perform normal tasks like, standing, walking, running and jumping . Sitting for long periods of time in the wrong position and poor posture can even cause;</p>
+        <ol>
+            <li class="card-text">Pressure on the disc between the bones of your spine</li>
+            <li class="card-text">Reduced function and mobility of your spine</li>
+            <li class="card-text">Increase inflammation leading to pain</li>
+            <li class="card-text">Slows the body’s processing of fat</li>
+            <li class="card-text">Leg and buttock muscles weaken</li>
+        </ol>
+        <p class="card-text">We use a wide range of techniques in order to help alleviate the pain you may have from increased sitting and poor posture.</p>
     </div>
-    <div class="card mb-3" style="border-color:transparent">
-        <div class="row g-0">
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4 class="card-title">Stress & Fatigue</h4>
-                    <p class="card-text">Stress can come in many forms and affect the body in many ways. People typically associate stress with negative situations like running late a meeting, family problems, losing a job etc.But stress can also occur when we do not get enough sleep, overtrain, work too hard or have bad posture.Stress causes all sorts of changes to the body including;</p>
-                    <ol>
-                    <li class="card-text">Tension in your muscles and joints</li>
-                    <li class="card-text">Clenching jaw</li>
-                    <li class="card-text">The release of ‘stress hormones’ like epinephrine and cortisol</li>
-                    <li class="card-text">Increase in blood pressure</li>
-                    <li class="card-text">Increase in breathing rate</li>
-                    <li class="card-text">Heartburn, stomach cramps, poor digestion</li>
-                    </ol>
-                    <p class="card-text">We can help with the muscle and joint problems associated with stress and fatigue. Using hands on techniques to help reduce your muscle tightness and joint stiffness we can help your body come better with stress and even help you sleep better.</p>
-                </div>
-            </div>
-            <div class="col-md-4 stress" style="background:url('/static/visitors/image/stress.png');background-repeat: no-repeat;background-size: cover;"></div>
-        </div>
+    <h4 class="card-title">Stress & Fatigue</h4>
+    <div class="clearfix mb-5">
+        <img src="{% static 'visitors/image/stress.png' %}" class="float-md-end mb-3 ms-md-3">
+        <p class="card-text">Stress can come in many forms and affect the body in many ways. People typically associate stress with negative situations like running late a meeting, family problems, losing a job etc.But stress can also occur when we do not get enough sleep, overtrain, work too hard or have bad posture.Stress causes all sorts of changes to the body including;</p>
+        <ol>
+            <li class="card-text">Tension in your muscles and joints</li>
+            <li class="card-text">Clenching jaw</li>
+            <li class="card-text">The release of ‘stress hormones’ like epinephrine and cortisol</li>
+            <li class="card-text">Increase in blood pressure</li>
+            <li class="card-text">Increase in breathing rate</li>
+            <li class="card-text">Heartburn, stomach cramps, poor digestion</li>
+        </ol>
+        <p class="card-text">We can help with the muscle and joint problems associated with stress and fatigue. Using hands on techniques to help reduce your muscle tightness and joint stiffness we can help your body come better with stress and even help you sleep better.</p>
     </div>
 </div>
 <div id="first_session"class="contact pt-5 pb-5">
@@ -146,10 +96,10 @@
 </div>
 <div class="container mt-5">
     <p>During your first osteopathy session, the osteopath will ask about your symptoms, general health and any other medical care you're receiving before carrying out a physical examination.
-    The osteopath will use their hands to find areas of weakness, tenderness, restriction or strain within your body, particularly the spine.
-    With your consent, you'll probably need to remove some clothing from the area being examined, and you may be asked to perform simple movements.
-    You should then be able to discuss whether osteopathy can help treat the problem and, if so, what the treatment programme should involve.
-    We are trained to identify when a patient needs to be referred to a GP or needs further tests, such as MRI scans or blood tests, to help diagnose the problem.</p>
+        The osteopath will use their hands to find areas of weakness, tenderness, restriction or strain within your body, particularly the spine.
+        With your consent, you'll probably need to remove some clothing from the area being examined, and you may be asked to perform simple movements.
+        You should then be able to discuss whether osteopathy can help treat the problem and, if so, what the treatment programme should involve.
+        We are trained to identify when a patient needs to be referred to a GP or needs further tests, such as MRI scans or blood tests, to help diagnose the problem.</p>
     <h5>Osteopathic techniques</h5>
     <p>An osteopath aims to restore the normal function and stability of the joints to help the body heal itself.
         They use their hands to treat your body in a variety of ways, using a mixture of gentle and forceful techniques.
@@ -171,11 +121,26 @@
 <div class=" mt-5">
     <center>
         <h3> An example</h3>
-        <video width='500' height= '300' controls>
+        <video width='300vw' height= '300vh' controls>
             <source src="{% static 'visitors/image/bande2.mp4' type='video/mp4' %}">
             Your browser does not support the video tag.
         </video>
     </center>
+</div>
+
+<div class="row contact mt-5">
+    <h2 class="text-center fs-1" style="color:#193051">Contact</h2>
+    <form class='ms-3' method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <div class="row container">
+            {% for field in form %}
+            <div class="col-md-6 col-12">
+                {% bootstrap_field field show_label=False %}
+            </div>
+            {% endfor %}
+        </div>
+        <center><button class="btn fs-4 mb-3" style="background-color:#193051;color:white">Contact</button></center>
+    </form>
 </div>
 
 {% endblock %}

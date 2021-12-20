@@ -7,6 +7,11 @@ Sign up
 {% block content %}
 <div class="container me-5 ms-5">
     <h1 class="text-center" style="color:#0fb4a9">Sign Up</h1>
+    <div class="social">
+        <center><p class="facebook"><a href="{% url 'social:begin' 'facebook' %}"  class="fb_text text-decoration-none"><i class="fab fa-facebook"></i>   Sign in with Facebook</a></p></center>
+        <center><p class="google"><a href="{% url 'social:begin' 'google-oauth2' %}"  class="google_text text-decoration-none"><i class="fab fa-google"></i>   Sign in with Google</a></p></center>
+        <center><h3>Or<br> Complete the form below to Sign Up</h3></center>
+    </div>
 
     <form method="post">
         {% csrf_token %}

@@ -14,3 +14,27 @@
 color:white}
 
 .save-change:hover {transform:scale(1.1)}
+
+.facebook:hover {
+color:white;
+transform:scale(1.1);}
+
+.fb_text:hover{color:white}
+
+.fb_text{border:1px #3B5998 solid;
+padding: 10px;
+color:white;
+background-color:#3B5998}
+
+.facebook{margin:50px}
+
+.google:hover {
+color:white;
+transform:scale(1.1);}
+
+.google_text:hover{color:white}
+
+.google_text{border:1px #DB4437 solid;
+padding: 10px 20px;
+color:white;
+background-color:#DB4437}

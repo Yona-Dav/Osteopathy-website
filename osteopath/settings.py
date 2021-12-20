@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['osteosport.org','localhost', '127.0.0.1']
 
 
 # Application definition
@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'accounts',
     'visitors',
     'staff',
-    'appointment'
+    'appointment',
+    'captcha',
+    'social_django',
+    'django_extensions',
 
 ]
 
@@ -145,6 +148,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = 'about'
 LOGIN_REDIRECT_URL = 'about'
+
+AUTHENTICATION_BACKENDS =['django.contrib.auth.backends.ModelBackend',
+                          'social_core.backends.facebook.FacebookOAuth2',
+                          'social_core.backends.google.GoogleOAuth2']
+
+
+RECAPTCHA_DOMAIN = 'www.recaptcha.net'
+RECAPTCHA_REQUIRED_SCORE = 0.85
 
 
 try:

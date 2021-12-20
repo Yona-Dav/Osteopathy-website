@@ -16,13 +16,22 @@ My profile
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Username:</span> {{profile.user.username}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Email:</span> {{profile.user.email}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Phone Number:</span> {{profile.phone}}</p>
-                <h4 class="card-title text-decoration-underline" style="color:#193051">Personal Information</h4>
+
+                <ul class="list-group mb-5">
+                    <a href="{% url 'detail_profile' profile.id %}#personal_info" class="list-group-item profile-hover">Personal Information</a>
+                    <a href="{% url 'detail_profile' profile.id %}#medical_info" class="list-group-item profile-hover">Medical Information</a>
+                    <a href="{% url 'detail_profile' profile.id %}#exercise" class="list-group-item profile-hover">Exercises</a>
+                    <a href="{% url 'detail_profile' profile.id %}#appointment" class="list-group-item profile-hover">Appointments</a>
+                    <a href="{% url 'detail_profile' profile.id %}#report" class="list-group-item profile-hover">Report</a>
+                </ul>
+
+                <h4 class="card-title text-decoration-underline" style="color:#193051" id="personal_info">Personal Information</h4>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Birth_date:</span> {{profile.birth_date}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Gender:</span> {{profile.sex}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Marital Status:</span> {{profile.marital_status}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Address:</span> {{profile.address}},{{profile.city}},{{profile.country}} </p>
+                <h4 class="card-title text-decoration-underline mt-5" style="color:#193051" id="medical_info">Medical Information</h4>
                 {% if profile.user.medicalprofile.id%}
-                <h4 class="card-title text-decoration-underline" style="color:#193051">Medical Information</h4>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Reason for visit:</span> {{profile.user.medicalprofile.reason_for_visit}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Symptoms that appear:</span> {{profile.user.medicalprofile.symptoms_appear}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Pain (scale 0 to 10):</span> {{profile.user.medicalprofile.rate_your_pain}}</p>
@@ -41,18 +50,31 @@ My profile
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Drink:</span> {% for int in profile.user.medicalprofile.drink.all %}{{int}}- {% endfor %} </p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Recreational drugs:</span> {% if profile.user.medicalprofile.recreational_drugs is False %}No {%else%} Yes{%endif%}  </p>
                 {%else%}
-                <h4 style="color:#193051">{{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}} did not fill the medical form</h4>
+                <h5 style="color:#193051">{{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}} did not fill the medical form</h5>
                 {% endif %}
-                <h4 class="card-title text-decoration-underline" style="color:#193051">All the Appointments</h4>
-                {% for sche in profile.user.schedule_set.all %}
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Date</span> {{sche.date}}</p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Time:</span> {{sche.hour}}</p>
-                <hr>
-                {% empty %}
-                <h5>No appointments</h5>
-                {% endfor %}
-                <h4 class="card-title text-decoration-underline" style="color:#193051">All the Exercises</h4>
-                <a href ="{% url 'my_exercises' profile.user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover">My Exercises</li></a>
+                <h4 class="card-title text-decoration-underline mb-3 mt-5" style="color:#193051" id="exercise">All the Exercises</h4>
+                <a href ="{% url 'my_exercises' profile.user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover">Exercises</li></a>
+                <h4 class="card-title text-decoration-underline mt-5 mb-3" style="color:#193051" id="appointment">All the Appointments</h4>
+                <div class="row">
+                    {% for sche in profile.user.schedule_set.all %}
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-6">
+                        <p class="card-text"><span class="fw-bold" style="color:#193051">Date</span> {{sche.date}}</p>
+                        <p class="card-text"><span class="fw-bold" style="color:#193051">Time:</span> {{sche.hour}}
+                            <a href="{% url 'new_report' profile.id sche.id%}" title="new report"><i class="fas fa-file-alt"></i></a>
+                        </p>
+                        <hr>
+                    </div>
+                    {% empty %}
+                    <h5>No appointments</h5>
+                    {% endfor %}
+                    <h4 class="card-title text-decoration-underline mb-3 mt-5" style="color:#193051" id="report">Report</h4>
+                    {% for rep in profile.report_set.all %}
+                    <p>{{rep.schedule.date}} => {{rep.content}}
+                        <a href="{% url 'update_report' rep.id %}" title="update report"><i class="fas fa-edit"></i></a></p>
+                    {% empty %}
+                    <p>no existing report</p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

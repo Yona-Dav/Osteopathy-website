@@ -18,6 +18,7 @@ My profile
                     <p class="card-text text-center">{{user.email}}</p>
                     <p class="card-text text-center">{{user.profile.phone}}</p>
                     <p class="card-text text-center">{{user.profile.address}} {{user.profile.city}}</p>
+                    <a class="text-decoration-none" href="{% url 'password_change' %}" style="color:#0fb4a9">Change Password</a>
 
                 </div>
                 <ul class="list-group list-group-flush">

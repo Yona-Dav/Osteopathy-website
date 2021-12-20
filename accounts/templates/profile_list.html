@@ -13,9 +13,10 @@ Profiles
     <h2 class="text-center" style="color:#193051">All the profiles</h2>
    <div class="row mt-5">
      {% for profile in profiles %}
-     <div class="col-4">
+       {% if profile.user.is_active %}
+     <div class="col-xs-12 col-sm-6 col-md-4  col-lg-3 mb-2">
 <div class="card">
-  <h5 class="card-header">{{profile.user.first_name}} {{profile.user.last_name}} ({{profile.user.username}})  <a href="#" class="card-link" title="delete profile"><i class="fas fa-trash-alt" style="color:red"></i></a>
+  <h5 class="card-header">{{profile.user.first_name}} {{profile.user.last_name}} ({{profile.user.username}})  <a href="{% url 'deactivate' profile.user.id %}" class="card-link" title="deactivate profile"><i class="fas fa-ban" style="color:red"></i></a>
   <a href="{% url 'detail_profile' profile.id%}" class="card-link" title="see profile"><i class="fas fa-eye" style="color:green"></i></a></h5>
   <div class="card-body">
     <p class="card-text">{{profile.user.email}}</p>
@@ -23,7 +24,7 @@ Profiles
   </div>
 </div>
     </div>
-
+{% endif %}
 {% endfor %}
 </div>
 </div>

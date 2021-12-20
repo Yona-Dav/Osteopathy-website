@@ -5,6 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'osteopath.settings')
 django.setup()
 
 from django.contrib.auth.models import User
+from appointment.models import Schedule
 from accounts.models import FrequencyPain,ActivitiesAggravateCondition, ActivitiesBetterCondition,IntefereWith,Symptoms, FamilyHistory, SufferedMedical, Drink
 
 
@@ -54,5 +55,13 @@ def populate_drink():
     drinks = ['alcohol', 'coffee','tea', 'sodas']
     for drink in drinks:
         dr = Drink.objects.create(name=drink)
+
+
+def populate_schedule():
+    dates = ['2021-12-26','2021-12-27','2021-12-28','2021-12-29','2021-12-30']
+    hours = ['08:00:00','09:00:00','10:00:00','11:00:00','12:00:00','13:00:00','14:00:00','15:00:00','16:00:00']
+    for date in dates:
+        for hour in hours:
+            schedule = Schedule.objects.create(date=date,hour=hour)
 
 

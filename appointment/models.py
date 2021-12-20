@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import User
+from accounts.models import User,Profile
 
 
 # Create your models here.
@@ -15,3 +15,10 @@ class Schedule(models.Model):
 
     class Meta:
         ordering = ['date','hour']
+        unique_together= ['date','hour']
+
+
+class Report(models.Model):
+    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    content = models.TextField()

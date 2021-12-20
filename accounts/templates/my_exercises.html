@@ -8,12 +8,9 @@ My Exercises
 {% if user.is_authenticated %}
 <div class="container">
     <h2 class="text-center">Exercises </h2>
-    {% if user.is_staff %}
-    <a class="btn mt-5" href="{% url 'categories' %}" style="background-color:#0fb4a9">Add Exercises</a>
-    {% endif %}
     <div class="row mt-3">
 
-        {% for ex in exercises %}
+        {% for ex in my_exercises %}
         <div class="col-xs-12 col-sm-6 col-lg-4 mb-3 ">
             <div class="card " style="width: 20rem;">
                 <video  width='300' height= '150' type="video/mp4" controls>
@@ -23,7 +20,7 @@ My Exercises
                 <div class="card-body">
                     <h5 class="card-title">{{ex.title}}</h5>
                     <p class="card-text">Category: {% for cat in ex.category.all %}{{cat.name}}{%endfor%}
-                        {% if user.is_staff %}<a href="{% url 'detail_ex' ex.id %}">remove</a>{% endif %}
+                        {% if user.is_staff %}<a href="{% url 'remove_ex' ex.id  userid %}" style="color:red">Remove</a>{% endif %}
                     </p>
                 </div>
             </div>
@@ -31,6 +28,29 @@ My Exercises
         {% empty %}
         <h4>No exercises</h4>
         {% endfor %}
+        <p></p>
+        <p></p><p></p>
+        {% if user.is_staff %}
+        <h4>Exercises that you can add to the patient</h4>
+        {% for exo in exercises%}
+        <div class="col-xs-12 col-sm-6 col-lg-4 mb-3 ">
+            <div class="card " style="width: 20rem;">
+                <video  width='300' height= '150' type="video/mp4" controls>
+                    <source src="{{exo.video.url}}" type='video/mp4'>
+                    Your browser does not support the video tag.
+                </video>
+                <div class="card-body">
+                    <h5 class="card-title">{{exo.title}}</h5>
+                    <p class="card-text">Category: {% for cat in exo.category.all %}{{cat.name}}{%endfor%}
+                        <a href="{% url 'add_ex' userid exo.id %}" title="add" style="color:green">Add</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>You gave to this patient all the existing exercises in the platform</p>
+        {% endfor %}
+        {% endif %}
     </div>
 </div>
 
