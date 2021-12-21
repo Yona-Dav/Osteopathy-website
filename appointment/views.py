@@ -170,4 +170,23 @@ class ReportUpdateView(UserPassesTestMixin,UpdateView):
         return self.request.user.is_staff
 
 
+class ReportDeleteView(DeleteView,UserPassesTestMixin):
+    model = Report
+    template_name = 'delete_view.html'
+    success_message = "The report was deleted successfully"
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(self.request, self.success_message  % obj.__dict__)
+        return super(ReportDeleteView, self).delete(request, *args, **kwargs)
+
+    def get_success_url(self):
+        rep_id = self.kwargs['pk']
+        rep = Report.objects.get(id=rep_id)
+        profile_id = rep.profile.id
+        return reverse_lazy('detail_profile', kwargs={'pk': profile_id})
+
+    def test_func(self):
+        return self.request.user.is_staff
+
 

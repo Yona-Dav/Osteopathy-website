@@ -7,8 +7,9 @@ from django.urls import reverse_lazy
 from visitors.models import CommonQuestion, Review
 from visitors.forms import CommonQuestionForm
 from django.contrib.admin.views.decorators import staff_member_required
-from .models import Exercise, Category
+from .models import Exercise, Category, Instruction
 from .forms import ExerciseForm
+from accounts.models import User, Profile
 # Create your views here.
 
 
@@ -149,6 +150,71 @@ class ExerciseDetailView(DetailView,UserPassesTestMixin):
     model = Exercise
     template_name = 'exercise_detail.html'
     context_object_name = 'exercise'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class InstructionCreateView(UserPassesTestMixin, CreateView):
+    model = Instruction
+    fields = ['content']
+    template_name = 'new_instruction.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        exercise_id = self.kwargs['exercise_id']
+        exercise = Exercise.objects.get(id=exercise_id)
+        self.object.exercise = exercise
+        user_id = self.kwargs['user_id']
+        user = User.objects.get(id=user_id)
+        self.object.user = user
+        self.object.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        user_id = self.kwargs['user_id']
+        return reverse_lazy('my_exercises', kwargs={'user_id': user_id})
+
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class InstructionDeleteView(DeleteView, UserPassesTestMixin):
+    model = Instruction
+    template_name = 'delete_view.html'
+    success_message = "The instruction was deleted successfully"
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(self.request, self.success_message  % obj.__dict__)
+        return super(InstructionDeleteView, self).delete(request, *args, **kwargs)
+
+    def get_success_url(self):
+        inst_id = self.kwargs['pk']
+        inst = Instruction.objects.get(id=inst_id)
+        user_id = inst.user.id
+        return reverse_lazy('my_exercises', kwargs={'user_id': user_id})
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class InstructionUpdateView(UpdateView, UserPassesTestMixin):
+    template_name = 'new_instruction.html'
+    fields = ['content']
+    model = Instruction
+
+    def form_valid(self, form):
+        self.object= form.save(commit=False)
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        inst_id = self.kwargs['pk']
+        inst = Instruction.objects.get(id=inst_id)
+        user_id = inst.user.id
+        return reverse_lazy('my_exercises', kwargs={'user_id': user_id})
 
     def test_func(self):
         return self.request.user.is_staff

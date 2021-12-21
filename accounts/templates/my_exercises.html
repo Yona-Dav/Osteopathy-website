@@ -5,6 +5,11 @@
 My Exercises
 {% endblock %}
 {% block content %}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-info">{{message}}<br></div>
+{%endfor%}
+{%endif%}
 {% if user.is_authenticated %}
 <div class="container">
     <h2 class="text-center">Exercises </h2>
@@ -20,8 +25,25 @@ My Exercises
                 <div class="card-body">
                     <h5 class="card-title">{{ex.title}}</h5>
                     <p class="card-text">Category: {% for cat in ex.category.all %}{{cat.name}}{%endfor%}
-                        {% if user.is_staff %}<a href="{% url 'remove_ex' ex.id  userid %}" style="color:red">Remove</a>{% endif %}
+                        {% if user.is_staff %}
+                        <a href="{% url 'remove_ex' ex.id  userid %}" style="color:red">Remove</a>
+                        {% endif %}
                     </p>
+                    <p class="text-decoration-underline">Instruction
+                        {% if user.is_staff %}
+                        <a href="{% url 'instruction' userid ex.id %}" title="Add instruction" class="text-decoration-none"><i class="fas fa-plus-circle"></i></a>
+                        {% endif %}
+                    </p>
+                    {% for inst in ex.instruction_set.all %}
+                    <li>{{inst.content}} <i>given since {{inst.date | timesince}} </i>
+                        {% if user.is_staff %}
+                        <a href="{% url 'delete_instruction' inst.id %}" title="delete instruction"><i class="fas fa-trash-alt" style="color:red"></i></a>
+                        <a href="{% url 'update_instruction' inst.id %}" title="update instruction"><i class="fas fa-pen "style="color:green"></i></a>
+                        {% endif %}
+                    </li>
+                    {% empty %}
+                    <p>No instruction was given by Yoram</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>

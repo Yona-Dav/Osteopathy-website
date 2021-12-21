@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
-from accounts.models import User
+from accounts.models import User, Profile
 
 # Create your models here.
 
@@ -21,3 +21,10 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Instruction(models.Model):
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    content = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
