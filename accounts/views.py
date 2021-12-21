@@ -13,13 +13,18 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import EmailMessage, send_mail, BadHeaderError
 from visitors.tokens import account_activation_token
 from django.http import HttpResponse
 from .forms import ProfileForm, MedicalProfileForm
 from staff.models import Exercise
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.contrib.auth.forms import PasswordResetForm
 
 
 # Create your views here.
@@ -188,3 +193,6 @@ class ConfirmResetPassword(PasswordResetConfirmView):
 
 class CompleteResetPassword(PasswordResetCompleteView):
     template_name= 'password_complete.html'
+
+
+
