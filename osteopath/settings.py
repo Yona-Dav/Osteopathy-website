@@ -158,6 +158,9 @@ AUTHENTICATION_BACKENDS =['django.contrib.auth.backends.ModelBackend',
 RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 import django_heroku
 
 try:

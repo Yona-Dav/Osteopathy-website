@@ -75,7 +75,7 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 
-class ProfileUpdateView(UpdateView, LoginRequiredMixin ):
+class ProfileUpdateView(UpdateView, LoginRequiredMixin):
     model = Profile
     fields = ['birth_date','sex','marital_status','phone','address','city','country']
     success_url = reverse_lazy('my_profile')
