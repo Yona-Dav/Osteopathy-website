@@ -158,9 +158,25 @@ AUTHENTICATION_BACKENDS =['django.contrib.auth.backends.ModelBackend',
 RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
+import django_heroku
 
 try:
     from.local_settings import *
 except ImportError:
-    raise Exception('A local_settings file MUST exist in order to use this project')
+    django_heroku.settings(locals())
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = 587
+
+    RECAPTCHA_PUBLIC_KEY = os.environ.get(str('RECAPTCHA_PUBLIC_KEY'))
+    RECAPTCHA_PRIVATE_KEY = os.environ.get(str('RECAPTCHA_PRIVATE_KEY'))
+
+    SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get(str('SOCIAL_AUTH_FACEBOOK_KEY'))
+    SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get(str('SOCIAL_AUTH_FACEBOOK_SECRET'))
+
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get(str('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY'))
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(str('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET'))
 
