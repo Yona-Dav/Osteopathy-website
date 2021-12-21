@@ -24,8 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 ALLOWED_HOSTS = ['osteosport.org','localhost', '127.0.0.1','https://osteosport.herokuapp.com/']
-CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['osteosport.herokuapp.com']
 
 # Application definition
 
