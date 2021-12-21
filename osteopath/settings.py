@@ -154,7 +154,7 @@ AUTHENTICATION_BACKENDS =['django.contrib.auth.backends.ModelBackend',
                           'social_core.backends.facebook.FacebookOAuth2',
                           'social_core.backends.google.GoogleOAuth2']
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
@@ -170,6 +170,7 @@ except ImportError:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
     EMAIL_PORT = 587
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
     RECAPTCHA_PUBLIC_KEY = os.environ.get(str('RECAPTCHA_PUBLIC_KEY'))
     RECAPTCHA_PRIVATE_KEY = os.environ.get(str('RECAPTCHA_PRIVATE_KEY'))

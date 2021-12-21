@@ -48,8 +48,6 @@ class Signup(CreateView):
             mail_subject, message, to=[to_email]
         )
         email.send()
-        self.object.is_active = True
-        self.object = form.save()
         user = authenticate(self.request, username=self.object.username, password=form.cleaned_data['password1'])
         if user:
             login(self.request, user)
