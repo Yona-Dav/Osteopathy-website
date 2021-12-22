@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'captcha',
     'social_django',
     'django_extensions',
+    'storages',
+
 
 ]
 
@@ -134,8 +136,8 @@ import os
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR/'staticfiles'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 
@@ -157,6 +159,9 @@ AUTHENTICATION_BACKENDS =['django.contrib.auth.backends.ModelBackend',
 RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
+AWS_DEFAULT_ACL = None
+AWS_S3_REGION_NAME = 'eu-central-1'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 import django_heroku
 
@@ -165,6 +170,7 @@ try:
 except ImportError:
     django_heroku.settings(locals())
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    DEBUG = os.environ.get('DEBUG')
     EMAIL_USE_TLS = True
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
@@ -181,3 +187,10 @@ except ImportError:
     SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get(str('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY'))
     SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(str('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET'))
 
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    AWS_URL = os.environ.get('AWS_URL')
+
+MEDIA_URL = AWS_URL + '/media/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
