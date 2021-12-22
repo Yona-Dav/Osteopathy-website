@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User,Profile
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -21,4 +22,4 @@ class Schedule(models.Model):
 class Report(models.Model):
     schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = RichTextField()

@@ -6,12 +6,15 @@ New Report
 
 {% block content %}
 <div class="container me-5 ms-5 ">
-    <h1 class="d-flex justify-content-center">Report</h1>
+    <h1 class="d-flex justify-content-center mb-5">Report</h1>
 
-    <form method="post">
+    <center><form method="post">
         {% csrf_token %}
-        {% bootstrap_form form %}
+        {{ form.media }}
+        {% for field in form %}
+        {% bootstrap_field field show_label=False %}
+        {% endfor %}
         {% bootstrap_button "Save" button_type="submit" button_class="btn-success" %}
-    </form>
+    </form></center>
 </div>
 {% endblock %}

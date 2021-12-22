@@ -74,9 +74,9 @@ My profile
                     {% endfor %}
                     <h4 class="card-title text-decoration-underline mb-3 mt-5" style="color:#193051" id="report">Report</h4>
                     {% for rep in profile.report_set.all %}
-                    <p>{{rep.schedule.date}} => {{rep.content}}
+                    <p><li>For {{rep.schedule.date}}: {{rep.content | safe}}
                         <a href="{% url 'update_report' rep.id %}" title="update report" style="color:green"><i class="fas fa-edit"></i></a>
-                        <a href="{% url 'delete_report' rep.id %}" title="delete report" style="color:red">delete</a></p>
+                        <a href="{% url 'delete_report' rep.id %}" title="delete report" style="color:red">delete</a></li></p>
                     {% empty %}
                     <p>no existing report</p>
                     {% endfor %}
