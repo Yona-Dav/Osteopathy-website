@@ -1,23 +1,34 @@
 {% extends 'partials/base.html' %}
+{% load static %}
 {% load bootstrap5 %}
 {% block title %}
 Sign up
 {% endblock %}
 
-{% block content %}
-<div class="container me-5">
-    <h1 class="text-center" style="color:#0fb4a9">Sign Up</h1>
-    <div class="social">
-        <center><p class="facebook"><a href="{% url 'social:begin' 'facebook' %}"  class="fb_text text-decoration-none"><i class="fab fa-facebook"></i>   Sign in with Facebook</a></p></center>
-        <center><p class="google"><a href="{% url 'social:begin' 'google-oauth2' %}"  class="google_text text-decoration-none"><i class="fab fa-google"></i>   Sign in with Google</a></p></center>
-        <center><h3>Or<br> Complete the form below to Sign Up</h3></center>
-    </div>
+{% block css %}
+<link href="{% static 'visitors/css/signup.css' %}" rel="stylesheet">
+{% endblock %}
 
-    <form method="post">
+{% block content %}
+<div class="container">
+    <center><form method="post" class="rounded">
+        <h1 class="text-center" style="color:#0fb4a9">Sign Up. It's free.</h1>
+        <div class="row">
+            <div class="social mb-5">
+                <center><p class="facebook"><a href="{% url 'social:begin' 'facebook' %}"  class="fb_text text-decoration-none"><i class="fab fa-facebook"></i>   Sign up with Facebook</a></p></center>
+                <center><p class="google"><a href="{% url 'social:begin' 'google-oauth2' %}"  class="google_text text-decoration-none"><i class="fab fa-google"></i>   Sign up with Google</a></p></center>
+            </div>
+        </div>
+        <h5 class="mb-5"><span>OR</span></h5>
+        <center><h3 class="mb-3">Complete the form below</h3></center>
         {% csrf_token %}
-        {% bootstrap_form form %}
-        <button class="btn fs-4" style="background-color:#0fb4a9">Sign Up</button>
-        <button type='reset' class="btn fs-4" style="background-color:#193051; color:white">Clear All</button>
-    </form>
+        {% for field in form %}
+        {% bootstrap_field field show_label=False %}
+        {% endfor%}
+        <button class="btn" style="background-color:#0fb4a9">Register</button>
+        <button type='reset' class="btn" style="background-color:#193051; color:white">Reset</button>
+    </form></center>
+</div>
+</div>
 </div>
 {% endblock %}

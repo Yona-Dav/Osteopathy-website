@@ -1,23 +1,30 @@
 {% extends 'partials/base.html' %}
+{% load static %}
 {% load bootstrap5 %}
 {% block title %}
 Login
 {% endblock %}
-
+{% block css %}
+<link href="{% static 'visitors/css/signup.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 <div class="container me-5 ">
-    <h1 class="text-center" style="color:#0fb4a9">Welcome to the Login page</h1>
 
-    <form method="post" class="mb-3">
+    <center><form method="post" class="mb-3">
+        <h1 class="text-center mb-5 mt-5" style="color:#0fb4a9">LOGIN</h1>
         {% csrf_token %}
-        {% bootstrap_form form %}
-        <button class="btn fs-4" style="background-color:#0fb4a9">Login</button>
-    </form>
-    <p><a class="text-decoration-none" href="{% url 'password_change' %}" style="color:#0fb4a9">Change Password</a></p>
-    <p><a class="text-decoration-none" href="{% url 'password_reset' %}" style="color:#0fb4a9">Forgotten your Password</a></p>
+        {% for field in form %}
+        {% bootstrap_field field show_label=False %}
+        {% endfor%}
+        <p><a class="text-decoration-none" href="{% url 'password_change' %}" style="color:#0fb4a9">Change Password</a></p>
+        <p><a class="text-decoration-none" href="{% url 'password_reset' %}" style="color:#0fb4a9">Forgotten your Password</a></p>
+        <button class="btn fs-5" style="background-color:#0fb4a9">Login</button>
+        <div class="social">
+            <h5 class="mb-5 mt-5"><span>OR</span></h5>
+            <center><p class="facebook"><a href="{% url 'social:begin' 'facebook' %}"  class="fb_text text-decoration-none"><i class="fab fa-facebook"></i>   Sign in with Facebook</a></p></center>
+            <center><p class="google"><a href="{% url 'social:begin' 'google-oauth2' %}"  class="google_text text-decoration-none"><i class="fab fa-google"></i>   Sign in with Google</a></p></center>
+        </div>
+    </form></center>
 </div>
-<div class="social">
-    <center><p class="facebook"><a href="{% url 'social:begin' 'facebook' %}"  class="fb_text text-decoration-none"><i class="fab fa-facebook"></i>   Sign in with Facebook</a></p></center>
-    <center><p class="google"><a href="{% url 'social:begin' 'google-oauth2' %}"  class="google_text text-decoration-none"><i class="fab fa-google"></i>   Sign in with Google</a></p></center>
-</div>
+
 {% endblock %}
