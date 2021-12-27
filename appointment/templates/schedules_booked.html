@@ -14,25 +14,52 @@ Schedules Booked
     <h2 class="text-center" style="color:#193051">Booked Schedules</h2>
     {% if user.is_staff %}
     <a href="{% url 'add_schedule' %}" class="btn" title="add a schedule" style="background-color:#0fb4a9">Add a schedule</a>
-
-    <div class="row mt-5">
-        {%for schedule in schedules %}
-        <div class="row fs-5">
-            {% ifchanged schedule.date|date%}
-            <hr>
-            <p></p>
-            <h3>{{schedule.date}}</h3>
-            {%endifchanged%}
-            <p class="card-item mb-2 "><i class="far fa-clock"></i> {{schedule.hour}} <i class="fas fa-arrow-right"></i> Patient <a href="{% url 'detail_profile' schedule.owner.profile.id %}">{{schedule.owner}};</a>{{schedule.owner.profile.phone}}; <a href="mailto:{{schedule.owner.email}}">{{schedule.owner.email}}</a>
-                <a href="{% url 'update_schedule' schedule.id %}" class="card-link" title="update"><i class="fas fa-pen "style="color:green"></i></a>
-                <a href="{% url 'delete_schedule' schedule.id %}" class="card-link" title="delete"><i class="fas fa-trash-alt" style="color:red"></i></a></p>
-        </div>
-        {% empty %}
-        <h2>There are not booked schedules</h2>
-        {% endfor %}
-    </div>
     {% endif %}
+    <div class="row mt-5">
 
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Hour</th>
+                <th>Patient</th>
+                <th>Profile</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {%for schedule in schedules %}
+            <tr>
+{% ifchanged schedule.date|date%}
+                <td class="fw-bold">{{schedule.date}}</td>
+                {%else%}
+                <td></td>
+                {% endifchanged%}
+                <td>{{schedule.hour}}</td>
+                <td>{{schedule.owner.first_name}} {{schedule.owner.last_name}}</td>
+                <td><a href="{% url 'detail_profile' schedule.owner.profile.id %}">profile</a></td>
+                <td><a href="tel:{{schedule.owner.profile.phone}}">{{schedule.owner.profile.phone}}</a></td>
+                <td><a href="mailto:{{schedule.owner.email}}">{{schedule.owner.email}}</a></td>
+                <td><a href="{% url 'update_schedule' schedule.id %}" title="update"><i class="fas fa-pen "style="color:green"></i></a></td>
+                <td><a href="{% url 'delete_schedule' schedule.id %}" class="card-link" title="delete"><i class="fas fa-trash-alt" style="color:red"></i></a></td>
+            </tr>
+
+
+            {% empty %}
+            <h2>There are not booked schedules</h2>
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
 </div>
 {%endblock%}
 

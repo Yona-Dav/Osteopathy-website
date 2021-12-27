@@ -2,20 +2,21 @@
 {% load bootstrap5 %}
 {% load static %}
 {% block title%}Add Common Question{% endblock %}
+{% block css %}
+<link href="{% static 'visitors/css/questions.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 {% if user.is_staff %}
 <div class="container">
     <div class="row">
-        <h2 class="text-center" style="color:#193051"> ADD A COMMON QUESTION</h2>
-        <form class="contact pt-5 pb-3" method="post">
+        <center><form class="" method="post">
+            <h2 class="text-center" style="color:#0fb4a9"> ADD A QUESTION</h2>
             {% csrf_token %}
             {% for field in form %}
             {% bootstrap_field field show_label=False %}
             {% endfor %}
-            <center><button class="btn fs-4" style="background-color:#193051;color:white">ADD</button></center>
-            <button type='reset' class="btn fs-4" style="background-color:#0fb4a9">Clear All</button>
-
-        </form>
+            <button class="btn fs-4" style="background-color:#193051;color:white">Save</button>
+        </form></center>
     </div>
 </div>
 {%endif%}

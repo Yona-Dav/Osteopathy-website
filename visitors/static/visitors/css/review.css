@@ -1,0 +1,19 @@
+blockquote {
+    border:none;
+    font-family:Georgia, "Times New Roman", Times, serif;
+}
+
+
+blockquote h4:before {
+content: open-quote;
+font-weight: bold;
+font-size:50px;
+color:#0fb4a9;
+}
+blockquote h4:after {
+content: close-quote;
+font-weight: bold;
+font-size:50px;
+color:#0fb4a9;
+
+}

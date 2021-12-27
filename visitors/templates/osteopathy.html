@@ -130,18 +130,21 @@
 </div>
 
 <div class="row contact mt-5">
-    <h2 class="text-center fs-1" style="color:#193051">Contact</h2>
-    <form class='ms-3' method="post" action="{% url 'contact' %}">
+    <h2 class="text-center fs-1 mb-5 mt-5" style="color:#193051">Contact</h2>
+    <center><form class='ms-3' method="post" action="{% url 'contact' %}">
         {% csrf_token %}
         <div class="row container">
-            {% for field in form %}
             <div class="col-md-6 col-12">
-                {% bootstrap_field field show_label=False %}
+                {% bootstrap_field form.name show_label=False %}
+                {% bootstrap_field form.email show_label=False %}
+                {% bootstrap_field form.phone_number show_label=False %}
             </div>
-            {% endfor %}
+            <div class="col-md-6 col-12">
+                {% bootstrap_field form.message show_label=False size='sm'  placeholder='Enter your message'%}
+            </div>
         </div>
         <center><button class="btn fs-4 mb-3" style="background-color:#193051;color:white">Contact</button></center>
-    </form>
+    </form></center>
 </div>
 
 {% endblock %}

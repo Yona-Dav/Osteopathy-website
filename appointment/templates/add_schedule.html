@@ -1,19 +1,25 @@
 {% extends 'partials/base.html' %}
+{% load static %}
 {% load bootstrap5 %}
 {% block title %}
 Add Schedule
 {% endblock %}
-
+{% block css %}
+<link href="{% static 'visitors/css/signup.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 {% if user.is_staff %}
-<div class="container ms-5">
-    <h1 class="text-center" style="color:#0fb4a9">A new schedule</h1>
-    <form method="post">
+<div class="container">
+
+    <center><form method="post">
+        <h1 class="text-center mb-4" style="color:#0fb4a9">Add schedule</h1>
         {% csrf_token %}
-        {% bootstrap_form form %}
+        {% bootstrap_field form.owner layout='horizontal'%}
+        {% bootstrap_field form.date layout='horizontal' placeholder='yyyy-mm-dd'%}
+        {% bootstrap_field form.hour layout='horizontal' placeholder='hh:mm:ss'%}
+        {% bootstrap_field form.available layout='horizontal'%}
         <button class="btn fs-4" style="background-color:#0fb4a9">Save</button>
-        <button type='reset' class="btn fs-4" style="background-color:#193051; color:white">Clear All</button>
-    </form>
+    </form></center>
 </div>
 {% endif %}
 {% endblock %}

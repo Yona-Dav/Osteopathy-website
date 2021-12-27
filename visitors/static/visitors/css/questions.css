@@ -1,6 +1,6 @@
 h3 {color:#0fb4a9}
 
-form {width:450px;
+form {width:70vw;
       border: 2px solid #0fb4a9;
       padding: 20px 50px;
       background-color:white;
@@ -10,7 +10,7 @@ body {background:url('/static/visitors/image/image.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         filter: opacity(80%) ;
-       }
+        }
 
 h5 {
    width: 100%;

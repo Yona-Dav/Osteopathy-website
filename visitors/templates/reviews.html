@@ -2,109 +2,97 @@
 {% load bootstrap5 %}
 {% load static %}
 {% block title%}Reviews{% endblock %}
+{% block css %}
+<link href="{% static 'visitors/css/review.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 {%if messages%}
 {%for message in messages%}
 <div class="alert alert-info">{{message}}<br></div>
 {%endfor%}
 {%endif%}
-<div class="container">
-  <h2 class="text-center" style="color:#193051">REVIEWS</h2>
+<div class="container text-center">
+  <h2 class="text-center text-decoration-underline" style="color:#193051">REVIEWS</h2>
   {% for rev in reviews %}
   {% if not rev.visible is False %}
   <div class="row pt-3">
-    <div class="card">
-      <div class="card-header" style="background-color:#0fb4a9">
-        {% if rev.rating == '5'%}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        {% elif rev.rating == '4' %}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star"></span>
-        {% elif rev.rating == '3' %}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        {% elif rev.rating == '2' %}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        {% else %}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        {%endif%}
-        {% if user.is_staff %}
-        <a href="{% url 'delete_review' rev.id %}">Delete</a>
-        {% endif %}
-      </div>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p>{{rev.content}}</p>
-          <footer class="blockquote-footer">from <cite>{{rev.name}}</cite> since {{rev.timestamp | timesince}} ago</footer>
-        </blockquote>
-      </div>
-    </div>
+    <blockquote><h4>{{rev.content}}</h4><center>
+      {% if rev.rating == '5'%}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      {% elif rev.rating == '4' %}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star"></span>
+      {% elif rev.rating == '3' %}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      {% elif rev.rating == '2' %}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      {% else %}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      {%endif%}
+    </center><center><cite>{{rev.name}}</cite> since {{rev.timestamp | timesince}} ago</center></blockquote>
+    {% if user.is_staff %}
+    <a href="{% url 'delete_review' rev.id %}">Delete</a>
+    {% endif %}
   </div>
   {%else%}
   {%if user.is_staff %}
-    <div class="row pt-3">
-    <div class="card">
-      <div class="card-header" style="background-color:#0fb4a9">
-        Rating :
-        {% if rev.rating == '5'%}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        {% elif rev.rating == '4' %}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star"></span>
-        {% elif rev.rating == '3' %}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        {% elif rev.rating == '2' %}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star checked"style="color:orange"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        {% else %}
-        <span class="fa fa-star checked" style="color:orange"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        {%endif%}
+  <div class="row pt-3">
+    <blockquote><h4>{{rev.content}}</h4><center>
+      {% if rev.rating == '5'%}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      {% elif rev.rating == '4' %}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star"></span>
+      {% elif rev.rating == '3' %}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      {% elif rev.rating == '2' %}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star checked"style="color:orange"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      {% else %}
+      <span class="fa fa-star checked" style="color:orange"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      {%endif%}
+    </center><center><cite>{{rev.name}}</cite> since {{rev.timestamp | timesince}} ago</center></blockquote>
+    <div>
+    <a href="{% url 'eval_review' rev.id 1 %}" class="btn btn-success">Published</a>
+    <a href="{% url 'eval_review' rev.id 0 %}" class="btn btn-danger">Rejected</a>
       </div>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p>{{rev.content}}</p>
-          <footer class="blockquote-footer">from <cite>{{rev.name}}</cite> since {{rev.timestamp | timesince}} ago</footer>
-          <a href="{% url 'eval_review' rev.id 1 %}" class="btn btn-success">Published</a>
-          <a href="{% url 'eval_review' rev.id 0 %}" class="btn btn-danger">Rejected</a>
-        </blockquote>
-      </div>
-    </div>
   </div>
   {% endif %}
   {% endif %}
