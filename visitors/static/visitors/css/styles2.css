@@ -26,7 +26,7 @@ padding: 10px;
 color:white;
 background-color:#3B5998}
 
-.facebook{margin:50px}
+.facebook{margin-bottom:40px}
 
 .google:hover {
 color:white;
@@ -38,3 +38,10 @@ transform:scale(1.1);}
 padding: 10px 20px;
 color:white;
 background-color:#DB4437}
+
+@media (max-width: 500px) {
+.fb_text{
+padding: 5px;}
+
+.google_text{padding:5px 15px}
+}

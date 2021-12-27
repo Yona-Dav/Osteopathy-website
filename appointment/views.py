@@ -4,7 +4,7 @@ from django.views.generic import CreateView, UpdateView, DetailView, ListView, V
 from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
 from .forms import ScheduleForm
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from accounts.models import User, Profile
@@ -12,6 +12,7 @@ from datetime import datetime
 from django.db.models import Q
 from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
+from .tasks import sleepy
 
 
 # Create your views here.
@@ -188,5 +189,10 @@ class ReportDeleteView(DeleteView,UserPassesTestMixin):
 
     def test_func(self):
         return self.request.user.is_staff
+
+
+def index(request):
+    sleepy(10)
+    return HttpResponse('<h1>TASK IS DONE !</h1>')
 
 

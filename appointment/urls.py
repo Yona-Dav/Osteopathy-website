@@ -13,5 +13,6 @@ urlpatterns = [
     path('report/create/<int:profile_id>/<int:schedule_id>/', views.ReportCreateView.as_view(), name='new_report'),
     path('updateReport/<int:pk>/', views.ReportUpdateView.as_view(), name='update_report'),
     path('<int:pk>/deleteReport/', views.ReportDeleteView.as_view(), name='delete_report'),
+    path('index/', views.index , name='index')
 
 ]

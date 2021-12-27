@@ -24,3 +24,6 @@ h5 span {
     background:white;
     padding:0 10px;
 }
+
+@media (max-width: 500px) {
+form{width:80vw}}
