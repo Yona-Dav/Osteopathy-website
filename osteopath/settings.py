@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'storages',
     'ckeditor',
+    'django_celery_beat',
+    'django_celery_results',
+    'celery',
 
 
 ]
@@ -164,8 +167,12 @@ AWS_DEFAULT_ACL = None
 AWS_S3_REGION_NAME = 'eu-central-1'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 
+CELERY_BROKEN_URL = 'amqp://localhost'
+CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Jerusalem'
+
 
 import django_heroku
 
@@ -196,7 +203,7 @@ except ImportError:
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
     AWS_URL = os.environ.get('AWS_URL')
 
-    CElERY_BROKER_URL = os.environ.get('CElERY_BROKER_URL')
+ #   CElERY_BROKER_URL = os.environ.get('CElERY_BROKER_URL', 'amqp://guest:guest@127.0.0.1//')
 
 MEDIA_URL = AWS_URL + '/media/'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

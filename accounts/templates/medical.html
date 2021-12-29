@@ -6,35 +6,55 @@
 <link href="{% static 'visitors/css/styles2.css' %}" rel="stylesheet">
 {%endblock%}
 {% block content %}
-<div class="container ms-5 me-5">
-<h2 class="mb-4" style="text-decoration:underline">Medical File</h2>
+<div class="container shadow-lg pt-3" style="">
+  <div class="row">
+  <div class="col-12 col-sm-12 col-md-4 mb-5">
+    <center><div class="card" style="width: 13rem;background-color:#193051; color:white">
+      <div class="card-body">
+        <h5>MY ACCOUNT</h5>
+      </div>
+      <ul class="list-group list-group-flush" >
+        <a href ="{% url 'my_profile' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">Profile<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+        {% if user.medicalprofile.id %}
+        <a href ="{% url 'medical_profile' user.medicalprofile.id %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">Medical File<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+        {% else %}
+        <a href ="{% url 'add_medical' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">Fill Medical File<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+        {% endif %}
+        <a href ="{% url 'my_schedules' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">My Appointments<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+        <a href ="{% url 'my_exercises' user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">My Exercises<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+        <a href ="{% url 'logout' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">Logout<i class="fas fa-sign-out-alt position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+      </ul>
+    </div></center>
+  </div>
+  <div class="col-12 col-sm-12 col-md-8 mb-5">
+    <h2 class="mb-4 text-center">MEDICAL INFORMATION</h2>
 
-{% if user.is_authenticated %}
-<ul class="">
-  <li><b>Reason:</b> {{user.medicalprofile.reason_for_visit}}</li>
-  <li class=""><b>Symptoms that appear:</b> {{user.medicalprofile.symptoms_appear}}</li>
-  <li class=""><b>Pain (scale 0 to 10):</b> {{user.medicalprofile.rate_your_pain}}</li>
-  <li class=""><b>Area of pain:</b> {{user.medicalprofile.area_of_pain}}</li>
-  <li class=""><b>Frequency of pain:</b> {{user.medicalprofile.frequency_of_pain}}</li>
-  <li class=""><b>Interfere with:</b> {% for int in user.medicalprofile.interfere_with.all %} {{int}}- {%endfor%}</li>
-  <li class=""><b>Activities that aggravate condition:</b> {% for int in user.medicalprofile.activities_aggravate_condition.all %} {{int}}- {%endfor%}</li>
-  <li class=""><b>Activities that make pain better:</b> {% for int in user.medicalprofile.make_pain_better.all %} {{int}}- {%endfor%}</li>
-  <li class=""><b>Symptoms:</b> {% for int in user.medicalprofile.symptoms.all %} {{int}}- {%endfor%}</li>
-  <li class=""><b>Suffered from the following medical condition:</b> {% for int in user.medicalprofile.suffered_from_medical.all %} {{int}}- {%endfor%}</li>
-  <li class=""><b>Family history:</b> {% for int in user.medicalprofile.family_history.all %} {{int}}- {%endfor%}</li>
-  <li class=""><b>Height:</b> {{user.medicalprofile.height}}</li>
-  <li class=""><b>Weight:</b> {{user.medicalprofile.weight}}</li>
-  <li class=""><b>All surgical procedures:</b> {{user.medicalprofile.surgical_procedure}} </li>
-  <li class=""><b>Smoke:</b> {% if user.medicalprofile.smoke is False %}No {%else%} Yes{%endif%} </li>
-  <li class=""><b>Drink:</b> {% for int in user.medicalprofile.drink.all %} {{int}}- {%endfor%}</li>
-  <li class=""><b>Recreational drugs:</b> {% if user.medicalprofile.recreational_drugs is False %}No {%else%} Yes{%endif%} </li>
+    {% if user.is_authenticated %}
+    <ul class="">
+      <div><b>Reason:</b> {{user.medicalprofile.reason_for_visit}}</div>
+      <div class=""><b>Symptoms that appear:</b> {{user.medicalprofile.symptoms_appear}}</div>
+      <div class=""><b>Pain (scale 0 to 10):</b> {{user.medicalprofile.rate_your_pain}}</div>
+      <div class=""><b>Area of pain:</b> {{user.medicalprofile.area_of_pain}}</div>
+      <div class=""><b>Frequency of pain:</b> {{user.medicalprofile.frequency_of_pain}}</div>
+      <div class=""><b>Interfere with:</b> {% for int in user.medicalprofile.interfere_with.all %} {{int}}- {%endfor%}</div>
+      <div class=""><b>Activities that aggravate condition:</b> {% for int in user.medicalprofile.activities_aggravate_condition.all %} {{int}}- {%endfor%}</div>
+      <div class=""><b>Activities that make pain better:</b> {% for int in user.medicalprofile.make_pain_better.all %} {{int}}- {%endfor%}</div>
+      <div class=""><b>Symptoms:</b> {% for int in user.medicalprofile.symptoms.all %} {{int}}- {%endfor%}</div>
+      <div class=""><b>Suffered from the following medical condition:</b> {% for int in user.medicalprofile.suffered_from_medical.all %} {{int}}- {%endfor%}</div>
+      <div class=""><b>Family history:</b> {% for int in user.medicalprofile.family_history.all %} {{int}}- {%endfor%}</div>
+      <div class=""><b>Height:</b> {{user.medicalprofile.height}}</div>
+      <div class=""><b>Weight:</b> {{user.medicalprofile.weight}}</div>
+      <div class=""><b>All surgical procedures:</b> {{user.medicalprofile.surgical_procedure}} </div>
+      <div class=""><b>Smoke:</b> {% if user.medicalprofile.smoke is False %}No {%else%} Yes{%endif%} </div>
+      <div class=""><b>Drink:</b> {% for int in user.medicalprofile.drink.all %} {{int}}- {%endfor%}</div>
+      <div class=""><b>Recreational drugs:</b> {% if user.medicalprofile.recreational_drugs is False %}No {%else%} Yes{%endif%} </div>
 
 
 
-</ul>
-    <a class="btn save-change" href="{% url 'update_medical_profile' user.medicalprofile.id %}" title="Update medical form">Update</a>
-
-{% endif %}
-
+    </ul>
+    <a class="btn save-change ms-5" href="{% url 'update_medical_profile' user.medicalprofile.id %}" title="Update medical form">Update</a>
+  </div>
+    {% endif %}
+</div>
 </div>
 {% endblock %}

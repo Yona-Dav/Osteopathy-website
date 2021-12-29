@@ -25,6 +25,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth import login as auth_login
 
 
 # Create your views here.
@@ -59,9 +60,22 @@ class Signup(CreateView):
         return HttpResponse('Please confirm your email address to complete the registration')
 
 
-class MyLoginView(LoginView):
-    template_name = 'login.html'
+# class MyLoginView(LoginView):
+#     template_name = 'login.html'
+#     form_class = MyAuthenticationForm
+
+
+class UpdatedLoginView(LoginView):
     form_class = MyAuthenticationForm
+    template_name = 'login.html'
+
+    def form_valid(self, form):
+        remember_me = form.cleaned_data.get('remember_me')
+        if not remember_me:
+            self.request.session.set_expiry(0)
+            self.request.session.modified = True
+        auth_login(self.request, form.get_user())
+        return super(UpdatedLoginView, self).form_valid(form)
 
 
 def activate(request, uidb64, token):

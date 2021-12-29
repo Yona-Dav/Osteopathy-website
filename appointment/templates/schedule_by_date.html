@@ -1,9 +1,12 @@
 {% extends 'partials/base.html' %}
+{%load static%}
 {% load bootstrap5 %}
 {% block title %}
 Available Schedules By Date
 {% endblock %}
-
+{% block css %}
+<link href="{% static 'visitors/css/schedules.css' %}" rel="stylesheet">
+{%endblock%}
 {% block content %}
 {%if messages%}
 {%for message in messages%}

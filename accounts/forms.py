@@ -13,7 +13,8 @@ class SignupForm(UserCreationForm):
 
 
 class MyAuthenticationForm(AuthenticationForm):
-    fields = ['username','password']
+    remember_me = forms.BooleanField(required=False)
+    fields = ['username','password','remember_me']
 
 
 class ProfileForm(forms.ModelForm):

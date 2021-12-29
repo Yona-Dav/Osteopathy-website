@@ -8,11 +8,12 @@ My profile
 <link href="{% static 'visitors/css/styles2.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-4">
-            <div class="card" style="width: 15rem;">
+<div class="container shadow-lg">
+    <div class="row pt-5">
+        <div class="col-12 col-sm-12 col-md-4 mb-5">
+            <center><div class="card" style="width: 15rem;background-color:#193051; color:white">
                 <div class="card-body">
+                    <h4>MY ACCOUNT</h4>
                     <img class="card-img-top mb-3" src="{% static 'visitors/image/default-profile.jpg' %}">
                     <h5 class="card-title text-center">{{user.first_name}} {{user.last_name}}</h5>
                     <p class="card-text text-center">{{user.email}}</p>
@@ -21,21 +22,21 @@ My profile
                     <a class="text-decoration-none" href="{% url 'password_change' %}" style="color:#0fb4a9">Change Password</a>
 
                 </div>
-                <ul class="list-group list-group-flush">
-                    <a href ="{% url 'my_profile' %}" style="text-decoration:none"><li class="list-group-item profile-hover">Profile</li></a>
+                <ul class="list-group list-group-flush" >
+                    <a href ="{% url 'my_profile' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start position-relative" style="background-color:#193051; color:white; border-top: 1px solid white">Profile<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
                     {% if user.medicalprofile.id %}
-                    <a href ="{% url 'medical_profile' user.medicalprofile.id %}" style="text-decoration:none"><li class="list-group-item profile-hover">Medical File</li></a>
+                    <a href ="{% url 'medical_profile' user.medicalprofile.id %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">Medical File<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
                     {% else %}
-                    <a href ="{% url 'add_medical' %}" style="text-decoration:none"><li class="list-group-item profile-hover">Fill Medical File</li></a>
+                    <a href ="{% url 'add_medical' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">Fill Medical File<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
                     {% endif %}
-                    <a href ="{% url 'my_schedules' %}" style="text-decoration:none"><li class="list-group-item profile-hover">My Appointments</li></a>
-                    <a href ="{% url 'my_exercises' user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover">My Exercises</li></a>
-                    <a href ="{% url 'logout' %}" style="text-decoration:none"><li class="list-group-item profile-hover">Logout</li></a>
+                    <a href ="{% url 'my_schedules' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">My Appointments<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    <a href ="{% url 'my_exercises' user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">My Exercises<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    <a href ="{% url 'logout' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">Logout<i class="fas fa-sign-out-alt position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
                 </ul>
-            </div>
+            </div></center>
         </div>
         <div class="col-12 col-sm-12 col-md-8">
-            <h2 class="text-center" style="color:#193051"> My profile</h2>
+            <h2 class="" style="color:#193051"> MY PROFILE</h2>
             <form  method="post">
                 {% csrf_token %}
                 <div class="row pt-5 ">

@@ -10,8 +10,9 @@
     <h3>We received your email and will respond shortly</h3>
 </div>
 {% else%}
-<div class="contact container pb-3 pt-3">
+<div class="contact container  pb-3 pt-3">
     <div class="row">
+        <h2 class="text-center fs-1 mt-5" style="color:#193051">Contact</h2>
         <div class="col-sm-5 col-xs-12 d-flex align-items-center justify-content-center">
             <div class="contact-box text-center ">
                 <p><a href="mailto:ydavid256@gmail.com" class="nav-link px-2 text-muted fs-5"><i class="far fa-envelope pe-3 "style="color:white">    ydavid256@gmail.com</i></a></p>
@@ -19,8 +20,7 @@
                 <p><i class="fas fa-map-marker-alt fs-5"style="color:white">    Baka, Jerusalem</i></p>
             </div>
         </div>
-        <div class="col-sm-7 col-xs-12">
-            <h2 class="text-center fs-1" style="color:#193051">Contact</h2>
+        <div class="col-sm-7 col-xs-12 mt-5">
             <form class='ms-5' method="post" action="{% url 'contact' %}">
                 {% csrf_token %}
                 {% for field in form %}

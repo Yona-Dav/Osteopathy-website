@@ -12,7 +12,7 @@ from datetime import datetime
 from django.db.models import Q
 from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
-from .tasks import sleepy
+
 
 
 # Create your views here.
@@ -190,9 +190,5 @@ class ReportDeleteView(DeleteView,UserPassesTestMixin):
     def test_func(self):
         return self.request.user.is_staff
 
-
-def index(request):
-    sleepy(10)
-    return HttpResponse('<h1>TASK IS DONE !</h1>')
 
 

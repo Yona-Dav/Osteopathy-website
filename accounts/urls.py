@@ -5,7 +5,7 @@ from appointment.views import MyAppointmentsView
 
 urlpatterns = [
     path('signup/', views.Signup.as_view(), name='signup'),
-    path('login/', views.MyLoginView.as_view(), name='login'),
+    path('login/', views.UpdatedLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
     path('profile/', views.ProfileUpdateView.as_view(), name='my_profile'),

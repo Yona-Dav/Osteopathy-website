@@ -1,4 +1,7 @@
-.navcolor{color:red}
+.navcolor{background-color: white;
+}
+
+.nav-link:hover{transform:scale(0.9);}
 
 
 .dropdown{color:#193051}

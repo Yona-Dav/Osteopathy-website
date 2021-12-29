@@ -10,24 +10,39 @@ Profiles
 {%endfor%}
 {%endif%}
 <div class="container">
-    <h2 class="text-center" style="color:#193051">All the profiles</h2>
-   <div class="row mt-5">
-     {% for profile in profiles %}
-       {% if profile.user.is_active %}
-       {% if not profile.user.is_staff %}
-     <div class="col-xs-12 col-sm-6 col-md-4  col-lg-3 mb-2">
-<div class="card">
-  <h5 class="card-header">{{profile.user.first_name}} {{profile.user.last_name}} ({{profile.user.username}})  <a href="{% url 'deactivate' profile.user.id %}" class="card-link" title="deactivate profile"><i class="fas fa-ban" style="color:red"></i></a>
-  <a href="{% url 'detail_profile' profile.id%}" class="card-link" title="see profile"><i class="fas fa-eye" style="color:green"></i></a></h5>
-  <div class="card-body">
-    <p class="card-text">{{profile.user.email}}</p>
-    <p class="card-text">{{profile.phone}}</p>
-  </div>
-</div>
-    </div>
-{% endif %}
-{% endif %}
-{% endfor %}
-</div>
+    <h2 class="text-center mb-5 pt-3" style="color:#193051">All the profiles</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>See Profile</th>
+            <th>Deactivate</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for profile in profiles %}
+        {% if profile.user.is_active %}
+        {% if not profile.user.is_staff %}
+        <tr>
+            <td class="">{{profile.user.first_name}}</td>
+            <td>{{profile.user.last_name}}</td>
+            <td>{{profile.user.username}}</td>
+            <td><a href="mailto:{{profile.user.email}}">{{profile.user.email}}</a></td>
+            <td><a href="tel:{{profile.phone}}">{{profile.phone}}</a></td>
+            <td><a href="{% url 'detail_profile' profile.id%}" title="see profile"><i class="fas fa-eye" style="color:green"></i></a></td>
+            <td><a href="{% url 'deactivate' profile.user.id %}" title="deactivate profile"><i class="fas fa-ban" style="color:red"></i></a></td>
+        </tr>
+
+
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        </tbody>
+
+    </table>
 </div>
 {% endblock %}

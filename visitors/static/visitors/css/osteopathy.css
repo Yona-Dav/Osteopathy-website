@@ -1,0 +1,25 @@
+.what-text {
+  animation-duration: 3s;
+  animation-name: glissement;
+}
+
+.for-who{
+  animation-duration: 3s;
+  animation-name: glissement;
+}
+
+.first-session{
+  animation-duration: 3s;
+  animation-name: glissement;
+}
+@keyframes glissement {
+  from {
+    margin-left: 150%;
+    width: 100%;
+  }
+
+  to {
+    margin-left: 10%;
+    width: 100%;
+  }
+}

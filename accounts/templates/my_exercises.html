@@ -11,10 +11,29 @@ My Exercises
 {%endfor%}
 {%endif%}
 {% if user.is_authenticated %}
-<div class="container">
-    <h2 class="text-center">Exercises </h2>
+<div class="container shadow-lg">
+    <h2 class="text-center pt-5" style="color:#193051">EXERCISES</h2>
     <div class="row mt-3">
-
+        {% if not user.is_staff%}
+        <div class="col-12 col-sm-12 col-md-4 mb-5">
+            <center><div class="card" style="width: 13rem;background-color:#193051; color:white">
+                <div class="card-body">
+                    <h5>MY ACCOUNT</h5>
+                </div>
+                <ul class="list-group list-group-flush" >
+                    <a href ="{% url 'my_profile' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">Profile<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    {% if user.medicalprofile.id %}
+                    <a href ="{% url 'medical_profile' user.medicalprofile.id %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">Medical File<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    {% else %}
+                    <a href ="{% url 'add_medical' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">Fill Medical File<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    {% endif %}
+                    <a href ="{% url 'my_schedules' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">My Appointments<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    <a href ="{% url 'my_exercises' user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">My Exercises<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    <a href ="{% url 'logout' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">Logout<i class="fas fa-sign-out-alt position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                </ul>
+            </div></center>
+        </div>
+        {% endif%}
         {% for ex in my_exercises %}
         <div class="col-xs-12 col-sm-6 col-lg-4 mb-3 ">
             <div class="card " style="width: 19rem;">

@@ -4,12 +4,13 @@
 {% block title%}About{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="{% static 'visitors/css/about.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content%}
-<div class="name text-center" style="color:#193051">
+<div class="text-center name" style="color:#193051">
     <h1>Yoram David</h1>
-    <h4 class="text-uppercase">Osteopath D.O - Personal Trainer</h4>
+    <h4 class="text-uppercase job">Osteopath D.O - Personal Trainer</h4>
 </div>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -39,13 +40,13 @@
 </div>
 <div class="container mt-5">
     <div class="row about me">
-        <h3 class="text-center">Meet Yoram David – Osteopath and Personal Trainer</h3>
+        <h3 class="text-center about-text">Meet Yoram David – Osteopath and Personal Trainer</h3>
         <div class="col-sm-5 col-xs-12 d-flex justify-content-end">
-            <img class="img-fluid  rounded-1 border border-5" src="{% static 'visitors/image/photo_profile_pro.jpeg' %}" width=200vw height="350vh">
+            <img class="img-fluid rounded-1 border border-5 about-img" src="{% static 'visitors/image/photo_profile_pro.jpeg' %}" width=200vw height="350vh">
         </div>
-        <div class="col-sm-7 col-xs-12">
-            <p class="mt-3">Yoram David – Osteopath graduated from Wingate School of Osteopathy in 2018. Since then he has been working at Jerusalem helping all his patients feel better, move better and live active lives.</p>
-            <p>Yoram uses a wide variety of hands-on treatment techniques including; massage, stretching, gentle joint mobilisation and manipulation, dry needling, MET, ART and lots of rehabilitation and exercise prescriptions. With this special blend of therapies combined with a holistic approach to patient care, Yoram is able to get great results and helps his patients feel better faster.</p>
+        <div class="col-sm-7 col-xs-12 ">
+            <p class="mt-3 about-text">Yoram David – Osteopath graduated from Wingate School of Osteopathy in 2018. Since then he has been working at Jerusalem helping all his patients feel better, move better and live active lives.
+            <br><br>Yoram uses a wide variety of hands-on treatment techniques including; massage, stretching, gentle joint mobilisation and manipulation, dry needling, MET, ART and lots of rehabilitation and exercise prescriptions. With this special blend of therapies combined with a holistic approach to patient care, Yoram is able to get great results and helps his patients feel better faster.</p>
         </div>
     </div>
 </div>

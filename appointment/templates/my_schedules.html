@@ -5,28 +5,52 @@ My Schedules
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2 class="text-center" style="color:#193051">My Appointments</h2>
-    <div class="row mt-5">
-        {%for schedule in schedules %}
-        <div class="card me-3 mb-3" style="width: 14rem;border:1px solid grey">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4 align-items-center">
-                        <h5><span class="badge bg-secondary">{{schedule.date.day}}</span></h5>
-                        <h6>{{schedule.date | date:"F" |upper| slice:3}}</h6>
-                    </div>
-                    <div class="col-8" style="border-left:2px solid #0fb4a9">
-                        <p class="card-subtitle"><i class="fas fa-calendar-day" style="color:grey"></i>  {{schedule.date | date:"l" }}</p>
-                        <p class="card-item mb-2 text-muted"><i class="far fa-clock"></i> {{schedule.hour}}</p>
-                        <a href="{% url 'cancel_appointment' schedule.id 1 %}" class="card-link" title="cancel schedule"><i class="fas fa-window-close fa-1x"style="color:red"></i></a>
+<div class="container shadow-lg">
+    <div class="row pt-5">
+        <div class="col-12 col-sm-12 col-md-4 mb-5">
+            <center><div class="card" style="width: 13rem;background-color:#193051; color:white">
+                <div class="card-body">
+                    <h5>MY ACCOUNT</h5>
+                </div>
+                <ul class="list-group list-group-flush" >
+                    <a href ="{% url 'my_profile' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">Profile<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    {% if user.medicalprofile.id %}
+                    <a href ="{% url 'medical_profile' user.medicalprofile.id %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">Medical File<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    {% else %}
+                    <a href ="{% url 'add_medical' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">Fill Medical File<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    {% endif %}
+                    <a href ="{% url 'my_schedules' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white; border-top: 1px solid white">My Appointments<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    <a href ="{% url 'my_exercises' user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">My Exercises<i class="fas fa-chevron-right position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                    <a href ="{% url 'logout' %}" style="text-decoration:none"><li class="list-group-item profile-hover text-start" style="background-color:#193051; color:white;border-top: 1px solid white">Logout<i class="fas fa-sign-out-alt position-absolute top-40 end-0 me-3 mt-1"></i></li></a>
+                </ul>
+            </div></center>
+        </div>
+        <div class="col-12 col-sm-12 col-md-8 mb-5">
+            <h2 class="text-start" style="color:#193051">MY APPOINTMENTS</h2>
+            <div class="row mt-5">
+                <p>Make sure to fill or update your medical file before the appointment</p>
+                <p>If you cannot come, please cancel your appointment</p>
+                {%for schedule in schedules %}
+                <div class="card me-3 mb-3" style="width: 14rem;border:1px solid grey">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4 align-items-center">
+                                <h5><span class="badge bg-secondary">{{schedule.date.day}}</span></h5>
+                                <h6>{{schedule.date | date:"F" |upper| slice:3}}</h6>
+                            </div>
+                            <div class="col-8" style="border-left:2px solid #0fb4a9">
+                                <p class="card-subtitle"><i class="fas fa-calendar-day" style="color:grey"></i>  {{schedule.date | date:"l" }}</p>
+                                <p class="card-item mb-2 text-muted"><i class="far fa-clock"></i> {{schedule.hour}}</p>
+                                <a href="{% url 'cancel_appointment' schedule.id 1 %}" class="card-link" title="cancel schedule"><i class="fas fa-window-close fa-1x"style="color:red"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {% empty %}
+                <h2>You do not have any appointments</h2>
+                {% endfor %}
             </div>
         </div>
-        {% empty %}
-        <h2>You do not have any appointments</h2>
-        {% endfor %}
     </div>
 </div>
 {%endblock%}
