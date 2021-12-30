@@ -2,7 +2,7 @@ from celery import shared_task,Celery
 from time import sleep
 from django.core.mail import send_mail, EmailMessage
 from appointment.models import Schedule
-from datetime import datetime,date
+from datetime import date
 from dateutil.relativedelta import relativedelta
 from django.template.loader import render_to_string
 from django.conf import settings

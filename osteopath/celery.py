@@ -23,9 +23,4 @@ def debug_task(self):
     print('Request: {0!r}'.format(self.request))
 
 
-CELERY_BEAT_SCHEDULE = {
-    'add-every-day':{
-        'task':'reminder_appointment',
-        'schedule': crontab(minute='*/5')
-    }
-}
+
