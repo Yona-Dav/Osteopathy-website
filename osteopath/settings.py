@@ -167,24 +167,30 @@ AWS_DEFAULT_ACL = None
 AWS_S3_REGION_NAME = 'eu-central-1'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 
+# CELERY SETTINGS
 
-from celery.schedules import crontab
-CELERY_BROKEN_URL = 'amqp://guest@localhost//'
-CELERY_RESULT_BACKEND = 'django-db'
-# REDIS_URL = "redis://localhost:6379"
-# CELERY_BROKER_URL=REDIS_URL
-# CELERY_RESULT_BACKEND=REDIS_URL
+CELERY_BROKER_URL = 'amqp://guest@localhost//'
 CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Jerusalem'
-CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
-CELERY_BEAT_SCHEDULE = {
-    'add-every-day':{
-        'task':'reminder_appointment',
-        'schedule': crontab(minute='*/5')
-    }
-}
+
+CELERY_RESULT_BACKEND = 'django-db'
+
+#CELERY BEAT
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+
+# CELERY_BROKEN_URL = 'amqp://guest@localhost//'
+# CELERY_RESULT_BACKEND = 'django-db'
+# # REDIS_URL = "redis://localhost:6379"
+# # CELERY_BROKER_URL=REDIS_URL
+# # CELERY_RESULT_BACKEND=REDIS_URL
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE = 'Asia/Jerusalem'
+# CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 
 import django_heroku
 

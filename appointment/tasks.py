@@ -17,7 +17,7 @@ def sleepy(duration):
     return None
 
 
-@app.task(name="reminder_appointment")
+@app.task(name='reminder_appointment')
 def reminder_appointment():
     schedules = Schedule.objects.filter(date=date.today() + relativedelta(days=1)).exclude(owner='yona')
     for schedule in schedules:

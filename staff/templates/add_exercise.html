@@ -2,12 +2,16 @@
 {% load bootstrap5 %}
 {% load static %}
 {% block title%}Add Exercises{% endblock %}
+{% block css %}
+<link href="{% static 'visitors/css/signup.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 {% if user.is_staff %}
 <div class="container">
     <div class="row">
-        <h2 class="text-center" style="color:#193051"> ADD EXERCISE</h2>
-        <form class="contact pt-5 pb-3" method="post" enctype="multipart/form-data">
+
+        <form class="pt-5 pb-3" method="post" enctype="multipart/form-data">
+            <h2 class="text-center" style="color:#193051"> ADD EXERCISE</h2>
             {% csrf_token %}
             {% bootstrap_form form %}
             <center><button class="btn fs-4" style="background-color:#193051;color:white">Save</button></center>
