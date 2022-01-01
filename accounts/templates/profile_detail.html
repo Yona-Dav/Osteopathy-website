@@ -14,75 +14,182 @@ My profile
 {%endfor%}
 {%endif%}
 <div class="container">
+    <a class="btn btn-warning mb-3" href="{% url 'profiles' %}" style="color:#193051">All the Profiles</a>
     <div class="row">
-        <div class="card">
+        <div class="card shadow-lg">
             <h3 class="card-header"style="background-color:#0fb4a9">Information about {{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}}</h3>
-            <div class="card-body">
+            <div class="card-body ">
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Username:</span> {{profile.user.username}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Email:</span> {{profile.user.email}}</p>
                 <p class="card-text"><span class="fw-bold" style="color:#193051">Phone Number:</span> {{profile.phone}}</p>
 
-                <ul class="list-group mb-5">
-                    <a href="{% url 'detail_profile' profile.id %}#personal_info" class="list-group-item profile-hover">Personal Information</a>
-                    <a href="{% url 'detail_profile' profile.id %}#medical_info" class="list-group-item profile-hover">Medical Information</a>
-                    <a href="{% url 'detail_profile' profile.id %}#exercise" class="list-group-item profile-hover">Exercises</a>
-                    <a href="{% url 'detail_profile' profile.id %}#appointment" class="list-group-item profile-hover">Appointments</a>
-                    <a href="{% url 'detail_profile' profile.id %}#report" class="list-group-item profile-hover">Report</a>
-                </ul>
-
-                <h4 class="card-title text-decoration-underline" style="color:#193051" id="personal_info">Personal Information</h4>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Birth_date:</span> {{profile.birth_date}}</p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Gender:</span> {{profile.sex}}</p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Marital Status:</span> {{profile.marital_status}}</p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Address:</span> {{profile.address}},{{profile.city}},{{profile.country}} </p>
-                <h4 class="card-title text-decoration-underline mt-5" style="color:#193051" id="medical_info">Medical Information</h4>
-                {% if profile.user.medicalprofile.id%}
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Reason for visit:</span> {{profile.user.medicalprofile.reason_for_visit}}</p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Symptoms that appear:</span> {{profile.user.medicalprofile.symptoms_appear}}</p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Pain (scale 0 to 10):</span> {{profile.user.medicalprofile.rate_your_pain}}</p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Area of pain:</span> {{profile.user.medicalprofile.area_of_pain}} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Frequency of pain:</span> {{profile.user.medicalprofile.frequency_of_pain}} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Interfere with:</span> {% for int in profile.user.medicalprofile.interfere_with.all %}{{int}}- {% endfor %} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Activities that aggravate condition:</span> {% for int in profile.user.medicalprofile.activities_aggravate_condition.all %}{{int}}- {% endfor %} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Activities that make pain better:</span> {% for int in profile.user.medicalprofile.make_pain_better.all %}{{int}}- {% endfor %} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Symptoms:</span> {% for int in profile.user.medicalprofile.symptoms.all %}{{int}}- {% endfor %} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Suffered from the following medical condition:</span> {% for int in profile.user.medicalprofile.suffered_from_medical.all %}{{int}}- {% endfor %} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Family history:</span> {% for int in profile.user.medicalprofile.family_history.all %}{{int}}- {% endfor %} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Height:</span> {{profile.user.medicalprofile.height}} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Weight:</span> {{profile.user.medicalprofile.weight}} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">All surgical procedures:</span> {{profile.user.medicalprofile.height}} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Smoke:</span> {% if profile.user.medicalprofile.smoke is False %}No {%else%} Yes{%endif%} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Drink:</span> {% for int in profile.user.medicalprofile.drink.all %}{{int}}- {% endfor %} </p>
-                <p class="card-text"><span class="fw-bold" style="color:#193051">Recreational drugs:</span> {% if profile.user.medicalprofile.recreational_drugs is False %}No {%else%} Yes{%endif%}  </p>
-                {%else%}
-                <h5 style="color:#193051">{{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}} did not fill the medical form</h5>
-                {% endif %}
-                <h4 class="card-title text-decoration-underline mb-3 mt-5" style="color:#193051" id="exercise">All the Exercises</h4>
-                <a href ="{% url 'my_exercises' profile.user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover">Exercises</li></a>
-                <h4 class="card-title text-decoration-underline mt-5 mb-3" style="color:#193051" id="appointment">All the Appointments</h4>
-                <div class="row">
-                    {% for sche in profile.user.schedule_set.all %}
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-6">
-                        <p class="card-text"><span class="fw-bold" style="color:#193051">Date</span> {{sche.date}}</p>
-                        <p class="card-text"><span class="fw-bold" style="color:#193051">Time:</span> {{sche.hour}}
-                            <a href="{% url 'new_report' profile.id sche.id%}" title="new report"><i class="fas fa-file-alt"></i></a>
-                        </p>
-                        <hr>
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne" style="background-color:white">
+                                <b>Personal Information</b>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Birth_date:</span> {{profile.birth_date}}</p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Gender:</span> {{profile.sex}}</p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Marital Status:</span> {{profile.marital_status}}</p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Address:</span> {{profile.address}},{{profile.city}},{{profile.country}} </p>
+                            </div>
+                        </div>
                     </div>
-                    {% empty %}
-                    <h5>No appointments</h5>
-                    {% endfor %}
-                    <h4 class="card-title text-decoration-underline mb-3 mt-5" style="color:#193051" id="report">Report</h4>
-                    {% for rep in profile.report_set.all %}
-                    <p><li>For {{rep.schedule.date}}: {{rep.content | safe}}
-                        <a href="{% url 'update_report' rep.id %}" title="update report" style="color:green"><i class="fas fa-edit"></i></a>
-                        <a href="{% url 'delete_report' rep.id %}" title="delete report" style="color:red">delete</a></li></p>
-                    {% empty %}
-                    <p>no existing report</p>
-                    {% endfor %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo" style="background-color:white">
+                                <b>Medical Information</b>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                            <div class="accordion-body">
+                                {% if profile.user.medicalprofile.id%}
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Reason for visit:</span> {{profile.user.medicalprofile.reason_for_visit}}</p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Symptoms that appear:</span> {{profile.user.medicalprofile.symptoms_appear}}</p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Pain (scale 0 to 10):</span> {{profile.user.medicalprofile.rate_your_pain}}</p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Area of pain:</span> {{profile.user.medicalprofile.area_of_pain}} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Frequency of pain:</span> {{profile.user.medicalprofile.frequency_of_pain}} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Interfere with:</span> {% for int in profile.user.medicalprofile.interfere_with.all %}{{int}}- {% endfor %} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Activities that aggravate condition:</span> {% for int in profile.user.medicalprofile.activities_aggravate_condition.all %}{{int}}- {% endfor %} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Activities that make pain better:</span> {% for int in profile.user.medicalprofile.make_pain_better.all %}{{int}}- {% endfor %} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Symptoms:</span> {% for int in profile.user.medicalprofile.symptoms.all %}{{int}}- {% endfor %} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Suffered from the following medical condition:</span> {% for int in profile.user.medicalprofile.suffered_from_medical.all %}{{int}}- {% endfor %} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Family history:</span> {% for int in profile.user.medicalprofile.family_history.all %}{{int}}- {% endfor %} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Height:</span> {{profile.user.medicalprofile.height}} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Weight:</span> {{profile.user.medicalprofile.weight}} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">All surgical procedures:</span> {{profile.user.medicalprofile.height}} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Smoke:</span> {% if profile.user.medicalprofile.smoke is False %}No {%else%} Yes{%endif%} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Drink:</span> {% for int in profile.user.medicalprofile.drink.all %}{{int}}- {% endfor %} </p>
+                                <p class="card-text"><span class="fw-bold" style="color:#193051">Recreational drugs:</span> {% if profile.user.medicalprofile.recreational_drugs is False %}No {%else%} Yes{%endif%}  </p>
+                                {%else%}
+                                <h5 style="color:#193051">{{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}} did not fill the medical form</h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree" style="background-color:white">
+                                <b>Exercises</b>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                            <div class="accordion-body">
+                                <a href ="{% url 'my_exercises' profile.user.id %}" style="text-decoration:none">See the Exercises</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour" style="background-color:white">
+                                <b>Appointments</b>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                            <div class="accordion-body">
+                                <div class="row">
+                                {% for sche in profile.user.schedule_set.all %}
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-6">
+                                    <p class="card-text"><span class="fw-bold" style="color:#193051">Date</span> {{sche.date}}</p>
+                                    <p class="card-text"><span class="fw-bold" style="color:#193051">Time:</span> {{sche.hour}}
+                                        <a href="{% url 'new_report' profile.id sche.id%}" title="new report"><i class="fas fa-file-alt"></i></a>
+                                    </p>
+                                    <hr>
+                                </div>
+                                {% empty %}
+                                <h5>No appointments</h5>
+                                {% endfor %}
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive" style="background-color:white">
+                                <b>Report</b>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+                            <div class="accordion-body">
+                                {% for rep in profile.report_set.all %}
+                                <p><li>For {{rep.schedule.date}}: {{rep.content | safe}}
+                                <a href="{% url 'update_report' rep.id %}" title="update report" style="color:green"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'delete_report' rep.id %}" title="delete report" style="color:red">delete</a></li></p>
+                                {% empty %}
+                                <p>no existing report</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
+<!--                <ul class="list-group mb-5">-->
+<!--                    <a href="{% url 'detail_profile' profile.id %}#personal_info" class="list-group-item profile-hover">Personal Information</a>-->
+<!--                    <a href="{% url 'detail_profile' profile.id %}#medical_info" class="list-group-item profile-hover">Medical Information</a>-->
+<!--                    <a href="{% url 'detail_profile' profile.id %}#exercise" class="list-group-item profile-hover">Exercises</a>-->
+<!--                    <a href="{% url 'detail_profile' profile.id %}#appointment" class="list-group-item profile-hover">Appointments</a>-->
+<!--                    <a href="{% url 'detail_profile' profile.id %}#report" class="list-group-item profile-hover">Report</a>-->
+<!--                </ul>-->
+
+<!--                <h4 class="card-title text-decoration-underline" style="color:#193051" id="personal_info">Personal Information</h4>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Birth_date:</span> {{profile.birth_date}}</p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Gender:</span> {{profile.sex}}</p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Marital Status:</span> {{profile.marital_status}}</p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Address:</span> {{profile.address}},{{profile.city}},{{profile.country}} </p>-->
+<!--                <h4 class="card-title text-decoration-underline mt-5" style="color:#193051" id="medical_info">Medical Information</h4>-->
+<!--                {% if profile.user.medicalprofile.id%}-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Reason for visit:</span> {{profile.user.medicalprofile.reason_for_visit}}</p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Symptoms that appear:</span> {{profile.user.medicalprofile.symptoms_appear}}</p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Pain (scale 0 to 10):</span> {{profile.user.medicalprofile.rate_your_pain}}</p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Area of pain:</span> {{profile.user.medicalprofile.area_of_pain}} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Frequency of pain:</span> {{profile.user.medicalprofile.frequency_of_pain}} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Interfere with:</span> {% for int in profile.user.medicalprofile.interfere_with.all %}{{int}}- {% endfor %} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Activities that aggravate condition:</span> {% for int in profile.user.medicalprofile.activities_aggravate_condition.all %}{{int}}- {% endfor %} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Activities that make pain better:</span> {% for int in profile.user.medicalprofile.make_pain_better.all %}{{int}}- {% endfor %} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Symptoms:</span> {% for int in profile.user.medicalprofile.symptoms.all %}{{int}}- {% endfor %} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Suffered from the following medical condition:</span> {% for int in profile.user.medicalprofile.suffered_from_medical.all %}{{int}}- {% endfor %} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Family history:</span> {% for int in profile.user.medicalprofile.family_history.all %}{{int}}- {% endfor %} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Height:</span> {{profile.user.medicalprofile.height}} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Weight:</span> {{profile.user.medicalprofile.weight}} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">All surgical procedures:</span> {{profile.user.medicalprofile.height}} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Smoke:</span> {% if profile.user.medicalprofile.smoke is False %}No {%else%} Yes{%endif%} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Drink:</span> {% for int in profile.user.medicalprofile.drink.all %}{{int}}- {% endfor %} </p>-->
+<!--                <p class="card-text"><span class="fw-bold" style="color:#193051">Recreational drugs:</span> {% if profile.user.medicalprofile.recreational_drugs is False %}No {%else%} Yes{%endif%}  </p>-->
+<!--                {%else%}-->
+<!--                <h5 style="color:#193051">{{profile.user.first_name|capfirst}} {{profile.user.last_name |capfirst}} did not fill the medical form</h5>-->
+<!--                {% endif %}-->
+<!--                <h4 class="card-title text-decoration-underline mb-3 mt-5" style="color:#193051" id="exercise">All the Exercises</h4>-->
+<!--                <a href ="{% url 'my_exercises' profile.user.id %}" style="text-decoration:none"><li class="list-group-item profile-hover">Exercises</li></a>-->
+<!--                <h4 class="card-title text-decoration-underline mt-5 mb-3" style="color:#193051" id="appointment">All the Appointments</h4>-->
+<!--                <div class="row">-->
+<!--                    {% for sche in profile.user.schedule_set.all %}-->
+<!--                    <div class="col-lg-3 col-md-4 col-sm-4 col-6">-->
+<!--                        <p class="card-text"><span class="fw-bold" style="color:#193051">Date</span> {{sche.date}}</p>-->
+<!--                        <p class="card-text"><span class="fw-bold" style="color:#193051">Time:</span> {{sche.hour}}-->
+<!--                            <a href="{% url 'new_report' profile.id sche.id%}" title="new report"><i class="fas fa-file-alt"></i></a>-->
+<!--                        </p>-->
+<!--                        <hr>-->
+<!--                    </div>-->
+<!--                    {% empty %}-->
+<!--                    <h5>No appointments</h5>-->
+<!--                    {% endfor %}-->
+<!--                    <h4 class="card-title text-decoration-underline mb-3 mt-5" style="color:#193051" id="report">Report</h4>-->
+<!--                    {% for rep in profile.report_set.all %}-->
+<!--                    <p><li>For {{rep.schedule.date}}: {{rep.content | safe}}-->
+<!--                    <a href="{% url 'update_report' rep.id %}" title="update report" style="color:green"><i class="fas fa-edit"></i></a>-->
+<!--                    <a href="{% url 'delete_report' rep.id %}" title="delete report" style="color:red">delete</a></li></p>-->
+<!--                    {% empty %}-->
+<!--                    <p>no existing report</p>-->
+<!--                    {% endfor %}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 {% endblock%}

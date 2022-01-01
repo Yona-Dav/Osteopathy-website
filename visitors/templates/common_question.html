@@ -19,11 +19,11 @@
   <div class="accordion pt-4">
     <div class="accordion-item" >
       <h2 class="accordion-header">
-        <button class="accordion-button fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{quest.id}}" aria-expanded="true" >
+        <button class="accordion-button fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{quest.id}}" aria-expanded="false" >
           {{quest.question}}
         </button>
       </h2>
-      <div id="collapse{{quest.id}}" class="accordion-collapse collapse show" >
+      <div id="collapse{{quest.id}}" class="accordion-collapse collapse" >
         <div class="accordion-body">
           {% if user.is_staff %}
           <a href="{% url 'delete_question' quest.id %}" class='fst-italic delete_question' style="color:#0fb4a9; text-decoration: none">  Delete</a>
