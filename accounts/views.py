@@ -209,4 +209,13 @@ class CompleteResetPassword(PasswordResetCompleteView):
     template_name= 'password_complete.html'
 
 
+@ staff_member_required
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        user = User.objects.filter(Q(first_name__contains=searched)|Q(last_name__contains=searched))
+        return render(request, 'search.html', {'searched':searched, 'users':user})
+    else:
+        return render(request, 'search.html')
+
 

@@ -19,6 +19,6 @@ urlpatterns = [
     path('exercises/detail/<int:pk>/',views.ExerciseDetailView.as_view(), name='detail_ex'),
     path('exercises/detail/<int:user_id>/<int:exercise_id>/', views.InstructionCreateView.as_view(), name='instruction'),
     path('<int:pk>/deleteInstruction/', views.InstructionDeleteView.as_view(), name='delete_instruction'),
-    path('updateInstruction/<int:pk>/', views.InstructionUpdateView.as_view(), name='update_instruction')
+    path('updateInstruction/<int:pk>/', views.InstructionUpdateView.as_view(), name='update_instruction'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
